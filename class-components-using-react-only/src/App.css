@@ -5,13 +5,10 @@ body {
 .App {
   text-align: center;
   margin: 20px 25%;
-  /* background-color: aqua; */
-  /* height: 50vh; */
   border: 1px solid black;
 }
 
 .AddTodo {
-  background-color: rgb(0, 128, 11);
   height: 8vh;
   display: flex;
   justify-content: center;
@@ -20,13 +17,11 @@ body {
 }
 
 .AddTodo input {
-  /* border: 1px solid black; */
   font-size: 25px;
   width: 70%;
 }
 
 .AddTodo button {
-  /* border: 1px solid black; */
   font-size: 25px;
   width: 30%;
   background-color: cadetblue;
@@ -44,9 +39,14 @@ body {
   margin: 0;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 .Filter {
   display: flex;
   justify-content: space-evenly;
+  margin: auto auto 10px auto;
 }
 
 .btn {
@@ -64,4 +64,9 @@ body {
   height: 50px;
   font-size: 25px;
   line-height: 50px;
+}
+
+.active {
+  background-color: cadetblue;
+  border: 1px solid black;
 }
