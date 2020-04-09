@@ -27,8 +27,12 @@ export default class TodoList extends React.Component {
       }
     } else if (event.type === "contextmenu") {
       event.preventDefault();
-      this.props.lists.splice(index - 1, 1);
-      this.props.toggle(this.props.lists);
+      event.target.parentElement.className += " hide";
+      //console.log(event.target.parentElement.className);
+      setTimeout(() => {
+        this.props.lists.splice(index - 1, 1);
+        this.props.toggle(this.props.lists);
+      }, 1000);
     }
   }
 
@@ -42,6 +46,7 @@ export default class TodoList extends React.Component {
                 key={ele.toString() + Math.random()}
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
+                className="TodoList-div"
               >
                 <h1>
                   {index + 1}: {ele[0]}
@@ -53,6 +58,7 @@ export default class TodoList extends React.Component {
                 key={ele.toString() + Math.random()}
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
+                className="TodoList-div"
               >
                 <h1 className="completed">
                   {index + 1}: {ele[0]}
@@ -72,6 +78,7 @@ export default class TodoList extends React.Component {
                 key={ele.toString() + Math.random()}
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
+                className="TodoList-div"
               >
                 <h1>
                   {index + 1}: {ele[0]}
@@ -91,6 +98,7 @@ export default class TodoList extends React.Component {
                 key={ele.toString() + Math.random()}
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
+                className="TodoList-div"
               >
                 <h1>
                   {index + 1}: {ele[0]}
