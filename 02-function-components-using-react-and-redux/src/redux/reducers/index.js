@@ -18,6 +18,8 @@ export default function rootReducer(state, action) {
     let newLists = state.lists.map((value) => [...value]);
     newLists.push([action.value, 1]);
     return { ...state, lists: newLists };
+  } else if (action.type === types.CHANGESHOWSTATUS) {
+    return { ...state, show: action.value };
   } else {
     return state;
   }
