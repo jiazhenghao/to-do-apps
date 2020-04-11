@@ -1,0 +1,84 @@
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.App {
+  text-align: center;
+  margin: 20px 25%;
+  border: 1px solid black;
+}
+
+.AddTodo {
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.AddTodo input {
+  font-size: 25px;
+  width: 70%;
+}
+
+.AddTodo button {
+  font-size: 25px;
+  width: 30%;
+  background-color: cadetblue;
+}
+
+.TodoList {
+  margin: 15px auto;
+  padding: 0 auto;
+  text-align: left;
+}
+
+.TodoList-div {
+  opacity: 1;
+  box-sizing: border-box;
+  transition: height 1000ms 0ms, opacity 1000ms 1000ms;
+}
+
+.TodoList-div.hide {
+  transition: height 1000ms 1000ms, opacity 1000ms 0ms;
+  opacity: 0;
+  height: 0px;
+}
+
+.TodoList h1 {
+  font-size: 25px;
+  padding: 0 auto;
+  margin: 0;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.Filter {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto auto 10px auto;
+}
+
+.btn {
+  border-radius: 5px;
+  background-color: white;
+}
+
+.btn-large {
+  height: 50px;
+  font-size: 25px;
+  border: 1px solid transparent;
+}
+
+.label {
+  height: 50px;
+  font-size: 25px;
+  line-height: 50px;
+}
+
+.active {
+  background-color: cadetblue;
+  border: 1px solid black;
+}
