@@ -13,7 +13,6 @@ function Filter({ show, changeShowStatus }) {
 
   return (
     <div className="Filter">
-      <span className="label">Show:</span>
       {buttonArray.map((ele) => {
         return ele === active ? (
           <button

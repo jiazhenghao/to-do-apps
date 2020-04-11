@@ -7,9 +7,11 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <AddTodo />
-      <TodoList />
-      <Filter />
+      <div className="item-a">
+        <AddTodo />
+        <TodoList />
+        <Filter />
+      </div>
     </div>
   );
 }

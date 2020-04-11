@@ -1,39 +1,58 @@
-body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+.App {
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 6% 25% 45% auto;
+  height: 100vh;
 }
 
-.App {
-  text-align: center;
-  margin: 20px 25%;
+.item-a {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
   border: 1px solid black;
+  display: grid;
+  grid-template-rows: 10% 5% auto 10%;
 }
 
 .AddTodo {
-  height: 8vh;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  display: grid;
+  grid-template-columns: 5% 60% 30% 5%;
 }
 
 .AddTodo input {
-  font-size: 25px;
-  width: 70%;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  font-size: 200%;
+  font-weight: bold;
 }
 
 .AddTodo button {
-  font-size: 25px;
-  width: 30%;
+  grid-column-start: 3;
+  grid-column-end: 4;
   background-color: cadetblue;
+  font-size: 200%;
+  font-weight: bold;
 }
 
 .TodoList {
-  margin: 15px auto;
-  padding: 0 auto;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  padding: 0;
+  margin: 0;
   text-align: left;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 5% auto 5%;
 }
 
 .TodoList-div {
+  margin: 0;
+  padding: 0;
+  grid-column-start: 2;
+  grid-column-end: 3;
   opacity: 1;
   box-sizing: border-box;
   transition: height 1000ms 0ms, opacity 1000ms 1000ms;
@@ -46,9 +65,7 @@ body {
 }
 
 .TodoList h1 {
-  font-size: 25px;
-  padding: 0 auto;
-  margin: 0;
+  font-size: 100%;
 }
 
 .completed {
@@ -56,26 +73,26 @@ body {
 }
 
 .Filter {
-  display: flex;
+  width: 100%;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  display: grid;
   justify-content: space-evenly;
   margin: auto auto 10px auto;
+  grid-template-columns: 5% auto 5%;
 }
 
 .btn {
   border-radius: 5px;
   background-color: white;
+  justify-self: center;
+  font-weight: bold;
 }
 
 .btn-large {
-  height: 50px;
-  font-size: 25px;
+  height: 100%;
+  font-size: 120%;
   border: 1px solid transparent;
-}
-
-.label {
-  height: 50px;
-  font-size: 25px;
-  line-height: 50px;
 }
 
 .active {
