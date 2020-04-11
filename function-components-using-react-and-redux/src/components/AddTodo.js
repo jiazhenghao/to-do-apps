@@ -1,11 +1,27 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addOneItem } from "../redux/actions/addTodoActions";
 
-function AddTodo() {
+function AddTodo({ addOneItem }) {
+  function handleClick(event) {
+    addOneItem(event.target.parentElement.firstChild.value);
+  }
+
   return (
     <div className="AddTodo">
       <input type="text" placeholder="Add New Things To Do" />
-      <button>Add</button>
+      <button onClick={handleClick}>Add</button>
     </div>
   );
 }
-export default AddTodo;
+
+AddTodo.propTypes = {
+  addOneItem: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = {
+  addOneItem,
+};
+
+export default connect(null, mapDispatchToProps)(AddTodo);
