@@ -14,3 +14,5 @@ This structure goes in this way: For each component using State or Dispatch, I w
 2. Right Click will remove this line forever, be careful
 
 ## An Online [Example](http://todoapp2.jzh.surge.sh)
+
+## More details about redux, click [here](https://redux.js.org/introduction/getting-started) or Chinese Docs [here](https://cn.redux.js.org/)
