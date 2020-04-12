@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { changeShowStatus } from "../redux/actions/filter";
 
 function Filter({ show, changeShowStatus }) {
   const active = show;
@@ -40,14 +39,12 @@ Filter.propTypes = {
   show: PropTypes.string.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    show: state.show,
-  };
-}
+const mapState = (state) => ({
+  show: state.show,
+});
 
-const mapDispatchToProps = {
-  changeShowStatus,
-};
+const mapDispatch = (dispatch) => ({
+  changeShowStatus: dispatch.show.changeShowStatus,
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapState, mapDispatch)(Filter);

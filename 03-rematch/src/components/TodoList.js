@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { toggle, deleteOneItem } from "../redux/actions/todoListActions";
 
 function TodoList({ show, lists, toggle, deleteOneItem }) {
   function handleClick(event) {
@@ -96,17 +95,15 @@ function TodoList({ show, lists, toggle, deleteOneItem }) {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    show: state.show,
-    lists: state.lists,
-  };
-}
+const mapState = (state) => ({
+  show: state.show,
+  lists: state.lists,
+});
 
-const mapDispatchToProps = {
-  toggle,
-  deleteOneItem,
-};
+const mapDispatch = (dispatch) => ({
+  toggle: dispatch.lists.toggle,
+  deleteOneItem: dispatch.lists.deleteOneItem,
+});
 
 TodoList.propTypes = {
   show: PropTypes.string.isRequired,
@@ -115,4 +112,4 @@ TodoList.propTypes = {
   deleteOneItem: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(mapState, mapDispatch)(TodoList);
