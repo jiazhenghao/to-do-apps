@@ -8,15 +8,33 @@ export default function rootReducer(state, action) {
       // let newLists = state.lists.slice(); // A state mutation was detected inside a dispatch,
       let newLists = state.lists.map((value) => [...value]);
       newLists[action.index][1] = !newLists[action.index][1] * 1;
+      // localStorage
+      if (state.currentMode === 1) {
+        const str = JSON.stringify(newLists);
+        localStorage.setItem("lists", str);
+        console.log("toggleStateLocalStorage");
+      }
       return { ...state, lists: newLists };
     }
   } else if (action.type === types.DELETEONEITEM) {
     let newLists = state.lists.map((value) => [...value]);
     newLists.splice(action.index, 1);
+    // localStorage
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+      console.log("deleteFromLocalStorage");
+    }
     return { ...state, lists: newLists };
   } else if (action.type === types.ADDONEITEM) {
     let newLists = state.lists.map((value) => [...value]);
     newLists.push([action.value, 1]);
+    // if localStorage is available, then store the new data into localStorage
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+      console.log("add to localStorage");
+    }
     return { ...state, lists: newLists };
   } else if (action.type === types.CHANGESHOWSTATUS) {
     return { ...state, show: action.value };
