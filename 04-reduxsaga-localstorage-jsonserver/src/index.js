@@ -4,6 +4,31 @@ import "./index.css";
 import App from "./App";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/configureStore";
+import { Provider as AlertProvider } from "react-alert";
+// import InfoIcon from "./icons/InfoIcon";
+// import SuccessIcon from "./icons/SuccessIcon";
+// import ErrorIcon from "./icons/ErrorIcon";
+// import CloseIcon from "./icons/CloseIcon";
+import AlertTemplate from "react-alert-template-basic";
+
+const options = {
+  position: "bottom right",
+  transition: "scale",
+};
+
+// const AlertTemplate = ({ options, message, close }) => {
+//   return (
+//     <div className="root__alert__div">
+//       {options.type === "info" && <InfoIcon />}
+//       {options.type === "success" && <SuccessIcon />}
+//       {options.type === "error" && <ErrorIcon />}
+//       <span style={{ flex: 2 }}>{message}</span>
+//       <button onClick={close} className="root__alert__button">
+//         <CloseIcon />
+//       </button>
+//     </div>
+//   );
+// };
 
 const initialState = {
   lists: [],
@@ -11,6 +36,7 @@ const initialState = {
   isLocalStorageAvailable: true,
   isJSONServerAvailable: true,
   currentMode: 0, //0 state from index.js, 1 state from localStorage, 2 state from json-server
+  filterValue: "",
 };
 
 if (window.localStorage) {
@@ -49,9 +75,11 @@ const store = configureStore(initialState);
 
 ReactDOM.render(
   <ReduxProvider store={store}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
+    <AlertProvider template={AlertTemplate} options={options}>
       <App />
-    </React.StrictMode>
+    </AlertProvider>
+    {/* </React.StrictMode> */}
   </ReduxProvider>,
   document.getElementById("root")
 );

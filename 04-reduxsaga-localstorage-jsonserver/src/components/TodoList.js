@@ -2,8 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toggle, deleteOneItem } from "../redux/actions/todoListActions";
+import { useAlert } from "react-alert";
 
-function TodoList({ show, lists, toggle, deleteOneItem }) {
+function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
+  let newLists = [];
+  const alert = useAlert();
+
   function handleClick(event) {
     const index = event.target.innerText.split(":")[0] - 1;
     if (event.type === "click") {
@@ -14,6 +18,15 @@ function TodoList({ show, lists, toggle, deleteOneItem }) {
       }
     } else if (event.type === "contextmenu") {
       event.preventDefault();
+      if (filterValue !== "") {
+        //alert("You cannot delete item when you are searching one");
+        alert.show("Not a good idea to delete one when searching", {
+          timeout: 3000, // custom timeout just for this one alert
+          type: "error",
+        });
+        // alert.show(<div style={{ color: "blue" }}>Some Message</div>);
+        return;
+      }
       event.target.parentElement.className += " hide";
       setTimeout(() => {
         deleteOneItem(index);
@@ -21,10 +34,25 @@ function TodoList({ show, lists, toggle, deleteOneItem }) {
     }
   }
 
+  if (filterValue !== "") {
+    newLists = lists.map((ele) => {
+      if (ele[0].indexOf(filterValue) !== -1) {
+        return [...ele];
+      } else {
+        return [];
+      }
+    });
+  } else {
+    newLists = lists.map((ele) => [...ele]);
+  }
+
   if (show === "All") {
     return (
       <div className="TodoList">
-        {lists.map((ele, index) => {
+        {newLists.map((ele, index) => {
+          if (ele.length === 0) {
+            return null;
+          }
           return ele[1] > 0 ? (
             <div
               key={ele.toString() + Math.random()}
@@ -56,7 +84,10 @@ function TodoList({ show, lists, toggle, deleteOneItem }) {
   } else if (show === "Active") {
     return (
       <div className="TodoList">
-        {lists.map((ele, index) => {
+        {newLists.map((ele, index) => {
+          if (ele.length === 0) {
+            return null;
+          }
           return ele[1] > 0 ? (
             <div
               key={ele.toString() + Math.random()}
@@ -76,7 +107,10 @@ function TodoList({ show, lists, toggle, deleteOneItem }) {
   } else if (show === "Completed") {
     return (
       <div className="TodoList">
-        {lists.map((ele, index) => {
+        {newLists.map((ele, index) => {
+          if (ele.length === 0) {
+            return null;
+          }
           return ele[1] === 0 ? (
             <div
               key={ele.toString() + Math.random()}
@@ -100,6 +134,7 @@ function mapStateToProps(state) {
   return {
     show: state.show,
     lists: state.lists,
+    filterValue: state.filterValue,
   };
 }
 
@@ -113,6 +148,7 @@ TodoList.propTypes = {
   lists: PropTypes.array.isRequired,
   toggle: PropTypes.func.isRequired,
   deleteOneItem: PropTypes.func.isRequired,
+  filterValue: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

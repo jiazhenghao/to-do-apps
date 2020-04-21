@@ -6,3 +6,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+ui,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+:root[theme="lightblue"] {
+  --theme-main: lightblue;
+  --theme-main-hover: darkblue;
+  --theme-main-button: darkblue;
+}
+
+:root[theme="tomato"] {
+  --theme-main: tomato;
+  --theme-main-hover: #3dbd0a;
+  --theme-main-button: #3dbd0a;
+}
+
+:root[theme="pink"] {
+  --theme-main: pink;
+  --theme-main-hover: rgb(240, 18, 55);
+  --theme-main-button: rgb(240, 18, 55);
+}
+
+:root[theme="lightseagreen"] {
+  --theme-main: lightseagreen;
+  --theme-main-hover: #032455;
+  --theme-main-button: #032455;
+}

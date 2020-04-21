@@ -1,11 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addOneItem } from "../redux/actions/addTodoActions";
+import { addOneItem, changeFilterValue } from "../redux/actions/addTodoActions";
 
-function AddTodo({ addOneItem }) {
+function AddTodo({ addOneItem, changeFilterValue }) {
+  // setup a timer
+  let timeout;
+  let val;
+
+  function handleChange(event) {
+    // If timer is null, reset it to 1000ms
+    // Otherwise, wait until timer is cleared
+    val = event.target.value;
+    if (!timeout) {
+      timeout = setTimeout(function () {
+        // Reset timeout
+        timeout = null;
+        console.log(val);
+        changeFilterValue(val);
+      }, 1000);
+    }
+  }
+
   function handleClick(event) {
-    // addOneItem(event.target.parentElement.firstChild.value);
     //do not add empty string to the lists
     const newValue = event.target.parentElement.firstChild.value;
     if (newValue === "") return;
@@ -16,7 +33,11 @@ function AddTodo({ addOneItem }) {
 
   return (
     <div className="AddTodo">
-      <input type="text" placeholder="Add New Things To Do" />
+      <input
+        type="text"
+        placeholder="Add New Things To Do"
+        onChange={handleChange}
+      />
       <button onClick={handleClick}>Add</button>
     </div>
   );
@@ -24,10 +45,12 @@ function AddTodo({ addOneItem }) {
 
 AddTodo.propTypes = {
   addOneItem: PropTypes.func.isRequired,
+  changeFilterValue: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
   addOneItem,
+  changeFilterValue,
 };
 
 export default connect(null, mapDispatchToProps)(AddTodo);
