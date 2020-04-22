@@ -5,30 +5,12 @@ import App from "./App";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/configureStore";
 import { Provider as AlertProvider } from "react-alert";
-// import InfoIcon from "./icons/InfoIcon";
-// import SuccessIcon from "./icons/SuccessIcon";
-// import ErrorIcon from "./icons/ErrorIcon";
-// import CloseIcon from "./icons/CloseIcon";
-import AlertTemplate from "react-alert-template-basic";
+import AlertTemplate from "./components/ReactAlertTemplate";
 
 const options = {
   position: "bottom right",
   transition: "scale",
 };
-
-// const AlertTemplate = ({ options, message, close }) => {
-//   return (
-//     <div className="root__alert__div">
-//       {options.type === "info" && <InfoIcon />}
-//       {options.type === "success" && <SuccessIcon />}
-//       {options.type === "error" && <ErrorIcon />}
-//       <span style={{ flex: 2 }}>{message}</span>
-//       <button onClick={close} className="root__alert__button">
-//         <CloseIcon />
-//       </button>
-//     </div>
-//   );
-// };
 
 const initialState = {
   lists: [],
@@ -75,11 +57,9 @@ const store = configureStore(initialState);
 
 ReactDOM.render(
   <ReduxProvider store={store}>
-    {/* <React.StrictMode> */}
     <AlertProvider template={AlertTemplate} options={options}>
       <App />
     </AlertProvider>
-    {/* </React.StrictMode> */}
   </ReduxProvider>,
   document.getElementById("root")
 );
