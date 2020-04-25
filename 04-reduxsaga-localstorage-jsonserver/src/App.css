@@ -1,13 +1,13 @@
 .App {
   display: grid;
   grid-template-columns: 25% auto 25%;
-  grid-template-rows: 15% 25% 45% auto;
+  grid-template-rows: 15% 25% 55% auto;
   height: 100vh;
 }
 
 .App__nav {
   grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
 }
@@ -15,7 +15,7 @@
 .nav__ul {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
   list-style: none;
   margin: 0;
   background-color: var(--theme-main);
@@ -55,9 +55,16 @@
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 4;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: grid;
   grid-template-rows: 10% 5% auto 10%;
+}
+
+.APP__sidebar {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
 }
 
 .AddTodo {
@@ -145,33 +152,6 @@
   background-color: var(--theme-main);
   border: 1px solid black;
 }
-
-/* .root__alert__button {
-  margin-left: "20px";
-  border: "none";
-  background-color: "transparent";
-  cursor: "pointer";
-  color: var(--theme-main-button);
-}
-
-.root__alert__div {
-  background-color: var(--theme-main);
-  color: "white";
-  padding: "30px";
-  text-transform: "uppercase";
-  border-radius: "3px";
-  display: "flex";
-  justify-content: "space-between";
-  align-items: "center";
-  box-shadow: "0px 2px 2px 2px rgba(0, 0, 0, 0.03)";
-  font-family: "Arial";
-  width: "300px";
-  box-sizing: "border-box";
-} */
-
-/* #__react-alert__ div div {
-  background-color: var(--theme-main);
-} */
 
 #__react-alert__ div div div {
   background-color: var(--theme-main);

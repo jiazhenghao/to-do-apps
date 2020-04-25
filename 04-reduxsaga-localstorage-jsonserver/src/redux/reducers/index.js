@@ -2,18 +2,15 @@ import * as types from "../actions/actionTypes";
 
 export default function rootReducer(state, action) {
   if (action.type === types.TOGGLE) {
-    // if (state.lists[action.index] === undefined || state.filterValue !== "") {
     if (state.lists[action.index] === undefined) {
       return state;
     } else {
-      // let newLists = state.lists.slice(); // A state mutation was detected inside a dispatch,
       let newLists = state.lists.map((value) => [...value]);
       newLists[action.index][1] = !newLists[action.index][1] * 1;
       // localStorage
       if (state.currentMode === 1) {
         const str = JSON.stringify(newLists);
         localStorage.setItem("lists", str);
-        // console.log("toggleStateLocalStorage");
       }
       return { ...state, lists: newLists };
     }
@@ -27,7 +24,6 @@ export default function rootReducer(state, action) {
     if (state.currentMode === 1) {
       const str = JSON.stringify(newLists);
       localStorage.setItem("lists", str);
-      // console.log("deleteFromLocalStorage");
     }
     return { ...state, lists: newLists };
   } else if (action.type === types.ADDONEITEM) {
@@ -37,13 +33,14 @@ export default function rootReducer(state, action) {
     if (state.currentMode === 1) {
       const str = JSON.stringify(newLists);
       localStorage.setItem("lists", str);
-      // console.log("add to localStorage");
     }
     return { ...state, lists: newLists, filterValue: "" };
   } else if (action.type === types.CHANGESHOWSTATUS) {
     return { ...state, show: action.value };
   } else if (action.type === types.CHANGEFILTERVALUE) {
     return { ...state, filterValue: action.value };
+  } else if (action.type === types.CHANGETHEMECOLOR) {
+    return { ...state, themeColor: action.value };
   } else {
     return state;
   }

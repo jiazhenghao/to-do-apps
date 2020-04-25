@@ -19,12 +19,10 @@ function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
     } else if (event.type === "contextmenu") {
       event.preventDefault();
       if (filterValue !== "") {
-        //alert("You cannot delete item when you are searching one");
         alert.show("Not a good idea to delete one when searching", {
-          timeout: 3000, // custom timeout just for this one alert
+          timeout: 5000, // custom timeout just for this one alert
           type: "error",
         });
-        // alert.show(<div style={{ color: "blue" }}>Some Message</div>);
         return;
       }
       event.target.parentElement.className += " hide";

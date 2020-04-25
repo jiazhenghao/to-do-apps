@@ -16,9 +16,9 @@ const initialState = {
   lists: [],
   show: "All",
   isLocalStorageAvailable: true,
-  isJSONServerAvailable: true,
   currentMode: 0, //0 state from index.js, 1 state from localStorage, 2 state from json-server
   filterValue: "",
+  themeColor: "",
 };
 
 if (window.localStorage) {
@@ -42,6 +42,18 @@ if (window.localStorage) {
   // after that, localStorage must has something to render as initialState
   initialState.lists = JSON.parse(localStorage.getItem("lists"));
   initialState.currentMode = 1;
+  // set up theme
+  if (localStorage.getItem("theme-todoapp") === null) {
+    localStorage.setItem("theme-todoapp", "tomato");
+    document.documentElement.setAttribute("theme", "tomato");
+    initialState.themeColor = "tomato";
+  } else {
+    document.documentElement.setAttribute(
+      "theme",
+      localStorage.getItem("theme-todoapp")
+    );
+    initialState.themeColor = localStorage.getItem("theme-todoapp");
+  }
 } else {
   initialState.lists = [
     [

@@ -16,7 +16,6 @@ function AddTodo({ addOneItem, changeFilterValue }) {
       timeout = setTimeout(function () {
         // Reset timeout
         timeout = null;
-        console.log(val);
         changeFilterValue(val);
       }, 1000);
     }

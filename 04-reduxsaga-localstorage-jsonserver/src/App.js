@@ -3,6 +3,7 @@ import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import Filter from "./components/Filter";
 import Nav from "./components/Nav";
+import Sidebar from "./components/Sidebar";
 import "./App.css";
 
 function App() {
@@ -12,10 +13,12 @@ function App() {
         <Nav />
       </div>
       <div className="APP__todo">
-        {/* <div className="item-a"> */}
         <AddTodo />
         <TodoList />
         <Filter />
+      </div>
+      <div className="APP__sidebar">
+        <Sidebar />
       </div>
     </div>
   );

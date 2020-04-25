@@ -1,27 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { changeThemeColor } from "../redux/actions/nav";
 
-function Nav() {
+function Nav({ isLocalStorageAvailable, changeThemeColor }) {
   function onChangeTheme(e) {
     e.preventDefault();
-    document.documentElement.setAttribute(
-      "theme",
-      e.target.innerText.toLowerCase()
-    );
+    const themeColor = e.target.innerText.toLowerCase();
+    document.documentElement.setAttribute("theme", themeColor);
+    if (isLocalStorageAvailable) {
+      localStorage.setItem("theme-todoapp", themeColor);
+    }
+    changeThemeColor(themeColor);
   }
 
   return (
     <ul className="nav__ul">
-      <li>
-        <a href="#" className="nav__ul__a">
-          Use MongoDB
-        </a>
-      </li>
-      <li>
-        <a href="#" className="nav__ul__a">
-          Use LocalStorage
-        </a>
-      </li>
       <li className="nav__ul__li">
         <a href="#" className="nav__ul__a">
           Pick Up Theme
@@ -58,4 +53,18 @@ function Nav() {
   );
 }
 
-export default Nav;
+function mapStateToProps(state) {
+  return {
+    isLocalStorageAvailable: state.isLocalStorageAvailable,
+  };
+}
+
+const mapDispatchToProps = {
+  changeThemeColor,
+};
+
+Nav.propTypes = {
+  isLocalStorageAvailable: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
