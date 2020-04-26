@@ -9,62 +9,54 @@ import {
   VerticalTimelineElement,
 } from "./react-vertical-timeline";
 import DeleteForever from "@material-ui/icons/DeleteForever";
+import Backup from "@material-ui/icons/Backup";
+import { recover, deleteForever } from "../redux/actions/sidebar";
 
-function Sidebar({ themeColor }) {
-  // const color = window.localStorage.getItem("theme-todoapp");
-  const contentStyle = { background: themeColor, color: "#000" };
-  const contentArrowStyle = { borderRight: "7px solid  " + themeColor };
-  const iconStyle = { background: themeColor, color: "#000" };
+function Sidebar({ themeColor, deletedItems, recover, deleteForever }) {
+  // const contentStyle = { background: themeColor, color: "#000" };
+  // const contentArrowStyle = { borderRight: "7px solid  " + themeColor };
+  // const iconStyle = { background: themeColor, color: "#000" };
 
-  function handleClick() {
-    console.log(123);
+  function handleClick(event) {
+    // delete forever
+    if (event.target.viewportElement === undefined) {
+      //console.log("1111");
+      console.log(event.target.childNodes[0].getAttribute("indexd"));
+      deleteForever(event.target.childNodes[0].getAttribute("indexd"));
+    } else if (event.target.viewportElement === null) {
+      //console.log("2222");
+      console.log(event.target.getAttribute("indexd"));
+      deleteForever(event.target.getAttribute("indexd"));
+    } else {
+      //console.log("3333");
+      console.log(event.target.viewportElement.getAttribute("indexd"));
+      deleteForever(event.target.viewportElement.getAttribute("indexd"));
+    }
   }
+
   return (
-    <div style={{}}>
-      <VerticalTimeline layout="1-column">
-        <VerticalTimelineElement
-          contentStyle={contentStyle}
-          contentArrowStyle={contentArrowStyle}
-          date="2011 - present"
-          iconStyle={iconStyle}
-          icon={<DeleteForever />}
-          iconOnClick={handleClick}
-        >
-          <p>辅导小朋友功课</p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          contentStyle={contentStyle}
-          contentArrowStyle={contentArrowStyle}
-          date="2011 - present"
-          iconStyle={iconStyle}
-          icon={<DeleteForever />}
-          iconOnClick={handleClick}
-        >
-          <p>揍儿子</p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          contentStyle={contentStyle}
-          contentArrowStyle={contentArrowStyle}
-          date="2011 - present"
-          iconStyle={iconStyle}
-          icon={<DeleteForever />}
-          iconOnClick={handleClick}
-        >
-          <p>
-            很长一段话，来测试文字长了会怎么样---公开资料显示，章泽天近期向北京互联网法院提起诉讼，以网络侵权责任纠纷为案由起诉网络问答社区知乎，该案已被法院受理开庭。--4月23日，周扬青在微博发布长文宣布已与罗志祥分手一段时间，并爆料罗志祥在与自己在一起的期间多次劈腿。随后，罗志祥在微博发文回应，称两人在一起九年分分合合很多次，自己做得不对的地方会检讨，但很多事情不是只言片语就能说清楚的。他对周扬青表示感谢，“我不后悔”。
-          </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          contentStyle={contentStyle}
-          contentArrowStyle={contentArrowStyle}
-          date="2011 - present"
-          iconStyle={iconStyle}
-          icon={<DeleteForever />}
-          iconOnClick={handleClick}
-        >
-          <p>Creative Direction, User Experience, Visual Design, Project</p>
-        </VerticalTimelineElement>
-      </VerticalTimeline>
+    <div>
+      {deletedItems.map((ele, index) => {
+        return (
+          <VerticalTimeline
+            layout="1-column"
+            key={ele.toString() + Math.random()}
+          >
+            <VerticalTimelineElement
+              date={ele[1]}
+              icon={<DeleteForever indexd={index} />}
+              iconOnClick={handleClick}
+            >
+              <p>
+                {ele[0]}{" "}
+                <span style={{ float: "right" }}>
+                  <Backup />
+                </span>
+              </p>
+            </VerticalTimelineElement>
+          </VerticalTimeline>
+        );
+      })}
     </div>
   );
 }
@@ -72,11 +64,19 @@ function Sidebar({ themeColor }) {
 function mapStateToProps(state) {
   return {
     themeColor: state.themeColor,
+    deletedItems: state.deletedItems,
   };
 }
 
-Sidebar.propTypes = {
-  themeColor: PropTypes.string.isRequired,
+const mapDispatchToProps = {
+  recover,
+  deleteForever,
 };
 
-export default connect(mapStateToProps, null)(Sidebar);
+Sidebar.propTypes = {
+  themeColor: PropTypes.string.isRequired,
+  deletedItems: PropTypes.array.isRequired,
+  recover: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

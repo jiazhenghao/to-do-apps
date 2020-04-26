@@ -12,6 +12,7 @@ export default function rootReducer(state, action) {
         const str = JSON.stringify(newLists);
         localStorage.setItem("lists", str);
       }
+
       return { ...state, lists: newLists };
     }
   } else if (action.type === types.DELETEONEITEM) {
@@ -19,13 +20,28 @@ export default function rootReducer(state, action) {
       return state;
     }
     let newLists = state.lists.map((value) => [...value]);
-    newLists.splice(action.index, 1);
+    const deletedItem = newLists.splice(action.index, 1);
+    // deletedItems read
+    let newDeletedItems = state.deletedItems.map((value) => [...value]);
+    const oDate = new Date();
+    const dateFormat =
+      oDate.toLocaleDateString() +
+      " " +
+      oDate.getHours() +
+      ":" +
+      oDate.getMinutes() +
+      ":" +
+      oDate.getSeconds();
+    newDeletedItems.unshift([deletedItem[0][0], dateFormat]);
     // localStorage
     if (state.currentMode === 1) {
       const str = JSON.stringify(newLists);
       localStorage.setItem("lists", str);
+      // put deleted items into localStorage "deletedItems"
+      const strDeleted = JSON.stringify(newDeletedItems);
+      localStorage.setItem("deletedItems", strDeleted);
     }
-    return { ...state, lists: newLists };
+    return { ...state, lists: newLists, deletedItems: newDeletedItems };
   } else if (action.type === types.ADDONEITEM) {
     let newLists = state.lists.map((value) => [...value]);
     newLists.push([action.value, 1]);
@@ -41,6 +57,18 @@ export default function rootReducer(state, action) {
     return { ...state, filterValue: action.value };
   } else if (action.type === types.CHANGETHEMECOLOR) {
     return { ...state, themeColor: action.value };
+  } else if (action.type === types.RECOVER) {
+  } else if (action.type === types.DELETEFOREVER) {
+    // delete from localStorage and change state
+    let newDeletedItems = state.deletedItems.map((value) => [...value]);
+    newDeletedItems.splice(action.index, 1);
+    // localStorage deleting
+    if (state.currentMode === 1) {
+      // put deleted items into localStorage "deletedItems"
+      const strDeleted = JSON.stringify(newDeletedItems);
+      localStorage.setItem("deletedItems", strDeleted);
+    }
+    return { ...state, deletedItems: newDeletedItems };
   } else {
     return state;
   }

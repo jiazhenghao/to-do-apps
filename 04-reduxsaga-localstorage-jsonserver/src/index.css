@@ -15,24 +15,42 @@ li {
 
 :root[theme="lightblue"] {
   --theme-main: lightblue;
-  --theme-main-hover: darkblue;
-  --theme-main-button: darkblue;
+  --theme-main-hover: rgb(139, 0, 139);
+  --theme-main-button: rgb(139, 0, 139);
+  --theme-main-font: #333;
 }
 
 :root[theme="tomato"] {
-  --theme-main: tomato;
+  --theme-main: rgb(255, 79, 47);
   --theme-main-hover: #3dbd0a;
   --theme-main-button: #3dbd0a;
+  --theme-main-font: white;
 }
 
 :root[theme="pink"] {
   --theme-main: pink;
   --theme-main-hover: rgb(240, 18, 55);
   --theme-main-button: rgb(240, 18, 55);
+  --theme-main-font: #444;
 }
 
 :root[theme="lightseagreen"] {
   --theme-main: lightseagreen;
   --theme-main-hover: #032455;
   --theme-main-button: #032455;
+  --theme-main-font: #eee;
+}
+
+:root[theme="grass"] {
+  --theme-main: rgb(9, 122, 28);
+  --theme-main-hover: rgb(57, 202, 81);
+  --theme-main-button: rgb(57, 202, 81);
+  --theme-main-font: #eee;
+}
+
+:root[theme="laker"] {
+  --theme-main: gold;
+  --theme-main-hover: rgb(193, 99, 236);
+  --theme-main-button: rgb(193, 99, 236);
+  --theme-main-font: purple;
 }

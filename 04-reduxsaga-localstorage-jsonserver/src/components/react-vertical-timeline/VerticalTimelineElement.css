@@ -4,6 +4,8 @@
 }
 .vertical-timeline-element > div {
   min-height: 1px;
+  background-color: var(--theme-main);
+  color: var(--theme-main-font);
 }
 .vertical-timeline-element:after {
   content: "";
@@ -37,6 +39,8 @@
   border-radius: 50%;
   box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08),
     0 3px 0 4px rgba(0, 0, 0, 0.05);
+  background-color: var(--theme-main);
+  color: var(--theme-main-font);
 }
 .vertical-timeline-element-icon svg {
   display: block;
@@ -186,7 +190,7 @@
   height: 0;
   width: 0;
   border: 7px solid transparent;
-  border-right: 7px solid white;
+  border-right: 7px solid var(--theme-main);
 }
 .vertical-timeline-element--no-children
   .vertical-timeline-element-content-arrow {

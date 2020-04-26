@@ -42,12 +42,34 @@ function Nav({ isLocalStorageAvailable, changeThemeColor }) {
               LightBlue
             </a>
           </li>
+          <li>
+            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+              Grass
+            </a>
+          </li>
+          <li>
+            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+              Laker
+            </a>
+          </li>
         </ul>
       </li>
       <li>
         <a href="#" className="nav__ul__a">
-          Login
+          Language
         </a>
+        {/* <ul>
+          <li>
+            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+              Chinese
+            </a>
+          </li>
+          <li>
+            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+              English
+            </a>
+          </li>
+        </ul> */}
       </li>
     </ul>
   );

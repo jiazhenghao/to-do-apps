@@ -19,6 +19,7 @@ const initialState = {
   currentMode: 0, //0 state from index.js, 1 state from localStorage, 2 state from json-server
   filterValue: "",
   themeColor: "",
+  deletedItems: [],
 };
 
 if (window.localStorage) {
@@ -53,6 +54,15 @@ if (window.localStorage) {
       localStorage.getItem("theme-todoapp")
     );
     initialState.themeColor = localStorage.getItem("theme-todoapp");
+  }
+  // add deletedItems into initialState
+  if (localStorage.getItem("deletedItems") === null) {
+    const array = [];
+    localStorage.setItem("deletedItems", JSON.stringify(array));
+  } else {
+    initialState.deletedItems = JSON.parse(
+      localStorage.getItem("deletedItems")
+    );
   }
 } else {
   initialState.lists = [
