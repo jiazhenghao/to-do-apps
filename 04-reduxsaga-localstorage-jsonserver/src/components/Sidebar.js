@@ -12,25 +12,28 @@ import DeleteForever from "@material-ui/icons/DeleteForever";
 import Backup from "@material-ui/icons/Backup";
 import { recover, deleteForever } from "../redux/actions/sidebar";
 
-function Sidebar({ themeColor, deletedItems, recover, deleteForever }) {
-  // const contentStyle = { background: themeColor, color: "#000" };
-  // const contentArrowStyle = { borderRight: "7px solid  " + themeColor };
-  // const iconStyle = { background: themeColor, color: "#000" };
-
-  function handleClick(event) {
+function Sidebar({ deletedItems, recover, deleteForever }) {
+  function handleDeleteForever(event) {
     // delete forever
     if (event.target.viewportElement === undefined) {
-      //console.log("1111");
-      console.log(event.target.childNodes[0].getAttribute("indexd"));
       deleteForever(event.target.childNodes[0].getAttribute("indexd"));
     } else if (event.target.viewportElement === null) {
-      //console.log("2222");
-      console.log(event.target.getAttribute("indexd"));
       deleteForever(event.target.getAttribute("indexd"));
     } else {
-      //console.log("3333");
-      console.log(event.target.viewportElement.getAttribute("indexd"));
       deleteForever(event.target.viewportElement.getAttribute("indexd"));
+    }
+  }
+
+  function handleRecover(event) {
+    // put this record to state.lists
+    try {
+      if (event.target.localName === "path") {
+        recover(event.target.parentElement.getAttribute("indexd"));
+      } else if (event.target.localName === "svg") {
+        recover(event.target.getAttribute("indexd"));
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -45,12 +48,12 @@ function Sidebar({ themeColor, deletedItems, recover, deleteForever }) {
             <VerticalTimelineElement
               date={ele[1]}
               icon={<DeleteForever indexd={index} />}
-              iconOnClick={handleClick}
+              iconOnClick={handleDeleteForever}
             >
               <p>
                 {ele[0]}{" "}
                 <span style={{ float: "right" }}>
-                  <Backup />
+                  <Backup onClick={handleRecover} indexd={index} />
                 </span>
               </p>
             </VerticalTimelineElement>
@@ -63,7 +66,6 @@ function Sidebar({ themeColor, deletedItems, recover, deleteForever }) {
 
 function mapStateToProps(state) {
   return {
-    themeColor: state.themeColor,
     deletedItems: state.deletedItems,
   };
 }
@@ -74,9 +76,9 @@ const mapDispatchToProps = {
 };
 
 Sidebar.propTypes = {
-  themeColor: PropTypes.string.isRequired,
   deletedItems: PropTypes.array.isRequired,
   recover: PropTypes.func.isRequired,
+  deleteForever: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

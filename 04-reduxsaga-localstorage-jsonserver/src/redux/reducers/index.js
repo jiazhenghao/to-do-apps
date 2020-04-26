@@ -58,6 +58,22 @@ export default function rootReducer(state, action) {
   } else if (action.type === types.CHANGETHEMECOLOR) {
     return { ...state, themeColor: action.value };
   } else if (action.type === types.RECOVER) {
+    let newLists = state.lists.map((value) => [...value]);
+    let newDeletedItems = state.deletedItems.map((value) => [...value]);
+    const item = newDeletedItems.splice(action.index, 1);
+    // console.log(item[0][0]);
+    newLists.unshift([item[0][0], 1]);
+    // update localStorage
+    if (state.currentMode === 1) {
+      // put deleted items into localStorage "deletedItems"
+      const strDeleted = JSON.stringify(newDeletedItems);
+      localStorage.setItem("deletedItems", strDeleted);
+      // update localStorage "lists"
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+    }
+
+    return { ...state, deletedItems: newDeletedItems, lists: newLists };
   } else if (action.type === types.DELETEFOREVER) {
     // delete from localStorage and change state
     let newDeletedItems = state.deletedItems.map((value) => [...value]);
@@ -68,6 +84,7 @@ export default function rootReducer(state, action) {
       const strDeleted = JSON.stringify(newDeletedItems);
       localStorage.setItem("deletedItems", strDeleted);
     }
+
     return { ...state, deletedItems: newDeletedItems };
   } else {
     return state;
