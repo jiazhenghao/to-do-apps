@@ -16,11 +16,11 @@ const initialState = {
   lists: [],
   show: 0, // 0:All 1:Active 2:Completed
   isLocalStorageAvailable: true,
-  currentMode: 0, //0 state from index.js, 1 state from localStorage,
+  currentMode: 0, // 0 state from index.js, 1 state from localStorage,
   filterValue: "",
-  themeColor: "",
+  themeColor: 0,
   deletedItems: [],
-  language: 0, //0:English 1:Chinese
+  language: 0, // 0:English 1:Chinese
 };
 
 if (window.localStorage) {
@@ -55,21 +55,24 @@ if (window.localStorage) {
     const str = JSON.stringify(array);
     localStorage.setItem("lists", str);
   }
+
   // after that, localStorage must has something to render as initialState
   initialState.lists = JSON.parse(localStorage.getItem("lists"));
   initialState.currentMode = 1;
+
   // set up theme
   if (localStorage.getItem("theme-todoapp") === null) {
-    localStorage.setItem("theme-todoapp", "tomato");
-    document.documentElement.setAttribute("theme", "tomato");
-    initialState.themeColor = "tomato";
+    localStorage.setItem("theme-todoapp", 0);
+    document.documentElement.setAttribute("theme", "0");
+    initialState.themeColor = 0;
   } else {
     document.documentElement.setAttribute(
       "theme",
-      localStorage.getItem("theme-todoapp")
+      localStorage.getItem("theme-todoapp") + ""
     );
-    initialState.themeColor = localStorage.getItem("theme-todoapp");
+    initialState.themeColor = localStorage.getItem("theme-todoapp") * 1;
   }
+
   // add deletedItems into initialState
   if (localStorage.getItem("deletedItems") === null) {
     const array = [];

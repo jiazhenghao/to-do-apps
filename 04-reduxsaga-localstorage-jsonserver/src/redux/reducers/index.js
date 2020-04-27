@@ -92,6 +92,8 @@ export default function rootReducer(state, action) {
     }
 
     return { ...state, deletedItems: newDeletedItems };
+  } else if (action.type === types.CHANGELANGUAGE) {
+    return { ...state, language: action.value };
   } else {
     return state;
   }

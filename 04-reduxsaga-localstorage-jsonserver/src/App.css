@@ -28,6 +28,7 @@
   color: var(--theme-main-font);
   font-weight: bold;
   background-color: var(--theme-main);
+  width: 140px;
 }
 
 .nav__ul__li {

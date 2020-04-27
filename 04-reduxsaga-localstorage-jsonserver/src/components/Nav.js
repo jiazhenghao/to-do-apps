@@ -2,74 +2,100 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { changeThemeColor } from "../redux/actions/nav";
+import { changeThemeColor, changeLanguage } from "../redux/actions/nav";
+import { english, chinese } from "../languages";
 
-function Nav({ isLocalStorageAvailable, changeThemeColor }) {
+function Nav({
+  isLocalStorageAvailable,
+  changeThemeColor,
+  language,
+  changeLanguage,
+}) {
+  let themeColors, themeHeader, lang, languages;
+  switch (language) {
+    case 0:
+      themeColors = english.themeColors;
+      themeHeader = english.themeHeader;
+      lang = english.lang;
+      languages = english.languages;
+      break;
+    case 1:
+      themeColors = chinese.themeColors;
+      themeHeader = chinese.themeHeader;
+      lang = chinese.lang;
+      languages = chinese.languages;
+      break;
+    default:
+      themeColors = english.themeColors;
+      themeHeader = english.themeHeader;
+      lang = english.lang;
+      languages = english.languages;
+  }
+
   function onChangeTheme(e) {
     e.preventDefault();
-    const themeColor = e.target.innerText.toLowerCase();
-    document.documentElement.setAttribute("theme", themeColor);
+    let themeColor = themeColors.indexOf(e.target.innerText);
+    if (themeColor === -1) themeColor = 0;
+    document.documentElement.setAttribute("theme", themeColor + "");
     if (isLocalStorageAvailable) {
       localStorage.setItem("theme-todoapp", themeColor);
     }
     changeThemeColor(themeColor);
   }
 
+  function onChangeLang(e) {
+    e.preventDefault();
+    let languagePick = languages.indexOf(e.target.innerText);
+    if (languagePick === -1) languagePick = 0;
+    if (isLocalStorageAvailable) {
+      localStorage.setItem("language", languagePick);
+    }
+    changeLanguage(languagePick);
+  }
+
   return (
     <ul className="nav__ul">
       <li className="nav__ul__li">
         <a href="#" className="nav__ul__a">
-          Pick Up Theme
+          {themeHeader}
         </a>
         <ul>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
-              Tomato
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
-              LightSeaGreen
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
-              Pink
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
-              LightBlue
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
-              Grass
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
-              Laker
-            </a>
-          </li>
+          {themeColors.map((ele, index) => {
+            return (
+              <li key={index}>
+                <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+                  {ele}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </li>
-      <li>
+      <li className="nav__ul__li">
         <a href="#" className="nav__ul__a">
-          Language
+          {lang}
         </a>
-        {/* <ul>
-          <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+        <ul>
+          {languages.map((ele, index) => {
+            return (
+              <li key={index}>
+                <a href="#" className="nav__ul__a" onClick={onChangeLang}>
+                  {ele}
+                </a>
+              </li>
+            );
+          })}
+          {/* <li>
+            <a href="#" className="nav__ul__a">
               Chinese
             </a>
           </li>
           <li>
-            <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
+            <a href="#" className="nav__ul__a">
               English
             </a>
-          </li>
-        </ul> */}
+          </li> */}
+        </ul>
       </li>
     </ul>
   );
@@ -78,15 +104,20 @@ function Nav({ isLocalStorageAvailable, changeThemeColor }) {
 function mapStateToProps(state) {
   return {
     isLocalStorageAvailable: state.isLocalStorageAvailable,
+    language: state.language,
   };
 }
 
 const mapDispatchToProps = {
   changeThemeColor,
+  changeLanguage,
 };
 
 Nav.propTypes = {
   isLocalStorageAvailable: PropTypes.bool.isRequired,
+  language: PropTypes.number.isRequired,
+  changeThemeColor: PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
