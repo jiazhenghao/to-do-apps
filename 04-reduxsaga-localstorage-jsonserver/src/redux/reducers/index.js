@@ -19,6 +19,7 @@ export default function rootReducer(state, action) {
     if (state.filterValue !== "") {
       return state;
     }
+
     let newLists = state.lists.map((value) => [...value]);
     const deletedItem = newLists.splice(action.index, 1);
     // deletedItems read
@@ -33,6 +34,7 @@ export default function rootReducer(state, action) {
       ":" +
       oDate.getSeconds();
     newDeletedItems.unshift([deletedItem[0][0], dateFormat]);
+
     // localStorage
     if (state.currentMode === 1) {
       const str = JSON.stringify(newLists);
@@ -41,15 +43,18 @@ export default function rootReducer(state, action) {
       const strDeleted = JSON.stringify(newDeletedItems);
       localStorage.setItem("deletedItems", strDeleted);
     }
+
     return { ...state, lists: newLists, deletedItems: newDeletedItems };
   } else if (action.type === types.ADDONEITEM) {
     let newLists = state.lists.map((value) => [...value]);
     newLists.push([action.value, 1]);
+
     // if localStorage is available, then store the new data into localStorage
     if (state.currentMode === 1) {
       const str = JSON.stringify(newLists);
       localStorage.setItem("lists", str);
     }
+
     return { ...state, lists: newLists, filterValue: "" };
   } else if (action.type === types.CHANGESHOWSTATUS) {
     return { ...state, show: action.value };
@@ -61,8 +66,8 @@ export default function rootReducer(state, action) {
     let newLists = state.lists.map((value) => [...value]);
     let newDeletedItems = state.deletedItems.map((value) => [...value]);
     const item = newDeletedItems.splice(action.index, 1);
-    // console.log(item[0][0]);
     newLists.unshift([item[0][0], 1]);
+
     // update localStorage
     if (state.currentMode === 1) {
       // put deleted items into localStorage "deletedItems"
@@ -78,6 +83,7 @@ export default function rootReducer(state, action) {
     // delete from localStorage and change state
     let newDeletedItems = state.deletedItems.map((value) => [...value]);
     newDeletedItems.splice(action.index, 1);
+
     // localStorage deleting
     if (state.currentMode === 1) {
       // put deleted items into localStorage "deletedItems"

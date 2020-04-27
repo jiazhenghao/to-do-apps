@@ -3,10 +3,29 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toggle, deleteOneItem } from "../redux/actions/todoListActions";
 import { useAlert } from "react-alert";
+import { english, chinese } from "../languages";
 
-function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
+function TodoList({
+  show,
+  lists,
+  toggle,
+  deleteOneItem,
+  filterValue,
+  language,
+}) {
   let newLists = [];
   const alert = useAlert();
+  let alertMessage;
+  switch (language) {
+    case 0:
+      alertMessage = english.alertMessage;
+      break;
+    case 1:
+      alertMessage = chinese.alertMessage;
+      break;
+    default:
+      alertMessage = english.alertMessage;
+  }
 
   function handleClick(event) {
     const index = event.target.innerText.split(":")[0] - 1;
@@ -19,16 +38,17 @@ function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
     } else if (event.type === "contextmenu") {
       event.preventDefault();
       if (filterValue !== "") {
-        alert.show("Not a good idea to delete one when searching", {
+        alert.show(alertMessage, {
           timeout: 5000, // custom timeout just for this one alert
           type: "error",
         });
         return;
       }
-      event.target.parentElement.className += " hide";
-      setTimeout(() => {
-        deleteOneItem(index);
-      }, 1000);
+      deleteOneItem(index);
+      // event.target.parentElement.className += " hide";
+      // setTimeout(() => {
+      //   deleteOneItem(index);
+      // }, 1000);
     }
   }
 
@@ -44,7 +64,7 @@ function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
     newLists = lists.map((ele) => [...ele]);
   }
 
-  if (show === "All") {
+  if (show === 0) {
     return (
       <div className="TodoList">
         {newLists.map((ele, index) => {
@@ -79,7 +99,7 @@ function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
         })}
       </div>
     );
-  } else if (show === "Active") {
+  } else if (show === 1) {
     return (
       <div className="TodoList">
         {newLists.map((ele, index) => {
@@ -102,7 +122,7 @@ function TodoList({ show, lists, toggle, deleteOneItem, filterValue }) {
         })}
       </div>
     );
-  } else if (show === "Completed") {
+  } else if (show === 2) {
     return (
       <div className="TodoList">
         {newLists.map((ele, index) => {
@@ -133,6 +153,7 @@ function mapStateToProps(state) {
     show: state.show,
     lists: state.lists,
     filterValue: state.filterValue,
+    language: state.language,
   };
 }
 
@@ -142,11 +163,12 @@ const mapDispatchToProps = {
 };
 
 TodoList.propTypes = {
-  show: PropTypes.string.isRequired,
+  show: PropTypes.number.isRequired,
   lists: PropTypes.array.isRequired,
   toggle: PropTypes.func.isRequired,
   deleteOneItem: PropTypes.func.isRequired,
   filterValue: PropTypes.string.isRequired,
+  language: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -144,6 +144,7 @@
 }
 
 .btn-large {
+  white-space: nowrap;
   height: 100%;
   font-size: 120%;
   border: 1px solid transparent;
@@ -155,5 +156,5 @@
 }
 
 #__react-alert__ div div div {
-  background-color: var(--theme-main);
+  background-color: var(--theme-main-hover);
 }

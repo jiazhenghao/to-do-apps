@@ -14,12 +14,13 @@ const options = {
 
 const initialState = {
   lists: [],
-  show: "All",
+  show: 0, // 0:All 1:Active 2:Completed
   isLocalStorageAvailable: true,
-  currentMode: 0, //0 state from index.js, 1 state from localStorage, 2 state from json-server
+  currentMode: 0, //0 state from index.js, 1 state from localStorage,
   filterValue: "",
   themeColor: "",
   deletedItems: [],
+  language: 0, //0:English 1:Chinese
 };
 
 if (window.localStorage) {
@@ -77,6 +78,14 @@ if (window.localStorage) {
     initialState.deletedItems = JSON.parse(
       localStorage.getItem("deletedItems")
     );
+  }
+
+  // read language from localstorage
+  if (localStorage.getItem("language") === null) {
+    localStorage.setItem("language", 0);
+  } else {
+    const num = localStorage.getItem("language") * 1;
+    initialState.language = num;
   }
 } else {
   initialState.lists = [

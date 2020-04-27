@@ -167,6 +167,8 @@
 .vertical-timeline-element-content p {
   margin: 1em 0 0;
   line-height: 1.6;
+  /* 增加wrap */
+  word-wrap: break-word;
 }
 
 .vertical-timeline-element-title {
