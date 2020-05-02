@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { changeShowStatus } from "../redux/actions/filter";
+import { changeShowStatus } from "../redux/actions/filterAction";
 import { english, chinese } from "../languages";
 
 function Filter({ show, changeShowStatus, language }) {

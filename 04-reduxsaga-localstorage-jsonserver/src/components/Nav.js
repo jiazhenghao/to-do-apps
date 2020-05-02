@@ -2,8 +2,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { changeThemeColor, changeLanguage } from "../redux/actions/nav";
+import { changeThemeColor, changeLanguage } from "../redux/actions/navAction";
 import { english, chinese } from "../languages";
+import { Link, withRouter } from "react-router-dom";
 
 function Nav({
   isLocalStorageAvailable,
@@ -11,25 +12,31 @@ function Nav({
   language,
   changeLanguage,
 }) {
-  let themeColors, themeHeader, lang, languages;
+  let themeColors, themeHeader, lang, languages, login, home;
   switch (language) {
     case 0:
       themeColors = english.themeColors;
       themeHeader = english.themeHeader;
       lang = english.lang;
       languages = english.languages;
+      login = english.login;
+      home = english.home;
       break;
     case 1:
       themeColors = chinese.themeColors;
       themeHeader = chinese.themeHeader;
       lang = chinese.lang;
       languages = chinese.languages;
+      login = chinese.login;
+      home = chinese.home;
       break;
     default:
       themeColors = english.themeColors;
       themeHeader = english.themeHeader;
       lang = english.lang;
       languages = english.languages;
+      login = english.login;
+      home = english.home;
   }
 
   function onChangeTheme(e) {
@@ -85,17 +92,25 @@ function Nav({
               </li>
             );
           })}
-          {/* <li>
-            <a href="#" className="nav__ul__a">
-              Chinese
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav__ul__a">
-              English
-            </a>
-          </li> */}
         </ul>
+      </li>
+      <li>
+        <Link
+          className="nav__ul__li nav__ul__a"
+          to="/login"
+          style={{ textDecoration: "none" }}
+        >
+          {login}
+        </Link>
+      </li>
+      <li>
+        <Link
+          className="nav__ul__li nav__ul__a"
+          to="/"
+          style={{ textDecoration: "none" }}
+        >
+          {home}
+        </Link>
       </li>
     </ul>
   );
@@ -120,4 +135,4 @@ Nav.propTypes = {
   changeLanguage: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));

@@ -10,7 +10,7 @@ import {
 } from "./react-vertical-timeline";
 import DeleteForever from "@material-ui/icons/DeleteForever";
 import Backup from "@material-ui/icons/Backup";
-import { recover, deleteForever } from "../redux/actions/sidebar";
+import { recover, deleteForever } from "../redux/actions/sidebarAction";
 
 function Sidebar({ deletedItems, recover, deleteForever }) {
   function handleDeleteForever(event) {

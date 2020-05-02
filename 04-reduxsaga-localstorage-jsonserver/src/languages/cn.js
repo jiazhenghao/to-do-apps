@@ -8,5 +8,7 @@ const cn = {
   themeHeader: "选择主题色",
   lang: "语言",
   languages: ["英文", "中文"],
+  login: "登陆",
+  home: "回到首页",
 };
 export default cn;

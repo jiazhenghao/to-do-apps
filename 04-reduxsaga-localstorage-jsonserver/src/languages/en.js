@@ -15,5 +15,7 @@ const en = {
   themeHeader: "Pick Up Theme",
   lang: "language",
   languages: ["English", "Chinese"],
+  login: "login",
+  home: "Home",
 };
 export default en;

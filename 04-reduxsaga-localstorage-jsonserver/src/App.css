@@ -21,16 +21,6 @@
   background-color: var(--theme-main);
 }
 
-.nav__ul__a {
-  text-decoration: none;
-  display: block;
-  padding: 1.5em;
-  color: var(--theme-main-font);
-  font-weight: bold;
-  background-color: var(--theme-main);
-  width: 140px;
-}
-
 .nav__ul__li {
   position: relative;
 }
@@ -49,6 +39,16 @@
 
 .nav__ul__a:hover {
   background: var(--theme-main-hover);
+}
+
+.nav__ul__a {
+  text-decoration: none;
+  display: block;
+  padding: 1.5em;
+  color: var(--theme-main-font);
+  font-weight: bold;
+  background-color: var(--theme-main);
+  width: 140px;
 }
 
 .APP__todo {
