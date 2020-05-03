@@ -17,5 +17,9 @@ const en = {
   languages: ["English", "Chinese"],
   login: "login",
   home: "Home",
+  login_h1: "Please Login (to use MongoDB)",
+  login_submit: "Login",
+  login_input_username: "username",
+  login_input_password: "password",
 };
 export default en;

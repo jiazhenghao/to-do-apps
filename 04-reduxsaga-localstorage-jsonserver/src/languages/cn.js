@@ -10,5 +10,9 @@ const cn = {
   languages: ["英文", "中文"],
   login: "登陆",
   home: "回到首页",
+  login_h1: "请登陆（登陆后使用MongoDB）",
+  login_submit: "登陆",
+  login_input_username: "用户名",
+  login_input_password: "密码",
 };
 export default cn;

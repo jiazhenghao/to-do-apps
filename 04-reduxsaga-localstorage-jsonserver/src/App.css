@@ -159,3 +159,57 @@
 #__react-alert__ div div div {
   background-color: var(--theme-main-hover);
 }
+
+.App__login__form {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  margin: 0 auto;
+  width: 50vw;
+  padding: 20px 30px 20px 30px;
+  font-size: 18px;
+  color: var(--theme-main-font);
+  text-shadow: 1px 1px 1px var(--theme-main-font);
+  border: none;
+  border-radius: 5px;
+  background-color: #aaa;
+}
+
+.App__login__form h1 {
+  padding: 0px 0px 10px 40px;
+  margin: -10px -30px 30px -30px;
+}
+
+.App__login__form input[type="text"],
+.App__login__form input[type="password"] {
+  border: none;
+  color: var(--theme-main-font);
+  height: 25px;
+  line-height: 15px;
+  margin-bottom: 16px;
+  margin-right: 6px;
+  margin-top: 2px;
+  padding: 5px 0px 5px 5px;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.App__login__form button {
+  background: var(--theme-main);
+  border: none;
+  padding: 10px 25px 10px 25px;
+  color: var(--theme-main-font);
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  text-shadow: 1px 1px 1px var(--theme-main-font);
+  font-weight: bold;
+  box-shadow: 1px 1px 1px var(--theme-main-font);
+}
+
+.App__login__form button:hover {
+  color: var(--theme-main-font);
+  background-color: var(--theme-main-hover);
+}
