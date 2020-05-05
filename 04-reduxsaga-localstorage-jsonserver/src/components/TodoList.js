@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toggle, deleteOneItem } from "../redux/actions/todoListActions";
 import { useAlert } from "react-alert";
-import { english, chinese } from "../languages";
+import languageArray from "../languages";
 
 function TodoList({
   show,
@@ -15,17 +15,6 @@ function TodoList({
 }) {
   let newLists = [];
   const alert = useAlert();
-  let alertMessage;
-  switch (language) {
-    case 0:
-      alertMessage = english.alertMessage;
-      break;
-    case 1:
-      alertMessage = chinese.alertMessage;
-      break;
-    default:
-      alertMessage = english.alertMessage;
-  }
 
   function handleClick(event) {
     const index = event.target.innerText.split(":")[0] - 1;
@@ -38,7 +27,7 @@ function TodoList({
     } else if (event.type === "contextmenu") {
       event.preventDefault();
       if (filterValue !== "") {
-        alert.show(alertMessage, {
+        alert.show(languageArray[language].alertMessage, {
           timeout: 5000, // custom timeout just for this one alert
           type: "error",
         });
@@ -122,7 +111,7 @@ function TodoList({
         })}
       </div>
     );
-  } else if (show === 2) {
+  } else {
     return (
       <div className="TodoList">
         {newLists.map((ele, index) => {
@@ -148,6 +137,15 @@ function TodoList({
   }
 }
 
+TodoList.propTypes = {
+  show: PropTypes.number.isRequired,
+  lists: PropTypes.array.isRequired,
+  toggle: PropTypes.func.isRequired,
+  deleteOneItem: PropTypes.func.isRequired,
+  filterValue: PropTypes.string.isRequired,
+  language: PropTypes.number.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     show: state.show,
@@ -160,15 +158,6 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   toggle,
   deleteOneItem,
-};
-
-TodoList.propTypes = {
-  show: PropTypes.number.isRequired,
-  lists: PropTypes.array.isRequired,
-  toggle: PropTypes.func.isRequired,
-  deleteOneItem: PropTypes.func.isRequired,
-  filterValue: PropTypes.string.isRequired,
-  language: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

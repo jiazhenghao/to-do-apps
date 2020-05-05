@@ -2,24 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addOneItem, changeFilterValue } from "../redux/actions/addTodoActions";
-import { english, chinese } from "../languages";
+import languageArray from "../languages";
 
 function AddTodo({ addOneItem, changeFilterValue, language }) {
   // setup a timer
-  let timeout, val, buttonAdd, placeHolder;
-  switch (language) {
-    case 0:
-      buttonAdd = english.buttonAdd;
-      placeHolder = english.placeHolder;
-      break;
-    case 1:
-      buttonAdd = chinese.buttonAdd;
-      placeHolder = chinese.placeHolder;
-      break;
-    default:
-      buttonAdd = english.buttonAdd;
-      placeHolder = english.placeHolder;
-  }
+  let timeout, val;
 
   function handleChange(event) {
     // If timer is null, reset it to 500ms
@@ -48,8 +35,12 @@ function AddTodo({ addOneItem, changeFilterValue, language }) {
 
   return (
     <div className="AddTodo">
-      <input type="text" placeholder={placeHolder} onChange={handleChange} />
-      <button onClick={handleClick}>{buttonAdd}</button>
+      <input
+        type="text"
+        placeholder={languageArray[language].placeHolder}
+        onChange={handleChange}
+      />
+      <button onClick={handleClick}>{languageArray[language].buttonAdd}</button>
     </div>
   );
 }

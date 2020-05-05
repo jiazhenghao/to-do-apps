@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { changeThemeColor, changeLanguage } from "../redux/actions/navAction";
-import { english, chinese } from "../languages";
+import languageArray from "../languages";
 import { Link, withRouter } from "react-router-dom";
 
 function Nav({
@@ -12,36 +12,11 @@ function Nav({
   language,
   changeLanguage,
 }) {
-  let themeColors, themeHeader, lang, languages, login, home;
-  switch (language) {
-    case 0:
-      themeColors = english.themeColors;
-      themeHeader = english.themeHeader;
-      lang = english.lang;
-      languages = english.languages;
-      login = english.login;
-      home = english.home;
-      break;
-    case 1:
-      themeColors = chinese.themeColors;
-      themeHeader = chinese.themeHeader;
-      lang = chinese.lang;
-      languages = chinese.languages;
-      login = chinese.login;
-      home = chinese.home;
-      break;
-    default:
-      themeColors = english.themeColors;
-      themeHeader = english.themeHeader;
-      lang = english.lang;
-      languages = english.languages;
-      login = english.login;
-      home = english.home;
-  }
-
   function onChangeTheme(e) {
     e.preventDefault();
-    let themeColor = themeColors.indexOf(e.target.innerText);
+    let themeColor = languageArray[language].themeColors.indexOf(
+      e.target.innerText
+    );
     if (themeColor === -1) themeColor = 0;
     document.documentElement.setAttribute("theme", themeColor + "");
     if (isLocalStorageAvailable) {
@@ -52,7 +27,9 @@ function Nav({
 
   function onChangeLang(e) {
     e.preventDefault();
-    let languagePick = languages.indexOf(e.target.innerText);
+    let languagePick = languageArray[language].languages.indexOf(
+      e.target.innerText
+    );
     if (languagePick === -1) languagePick = 0;
     if (isLocalStorageAvailable) {
       localStorage.setItem("language", languagePick);
@@ -64,10 +41,10 @@ function Nav({
     <ul className="nav__ul">
       <li className="nav__ul__li">
         <a href="#" className="nav__ul__a">
-          {themeHeader}
+          {languageArray[language].themeHeader}
         </a>
         <ul>
-          {themeColors.map((ele, index) => {
+          {languageArray[language].themeColors.map((ele, index) => {
             return (
               <li key={index}>
                 <a href="#" className="nav__ul__a" onClick={onChangeTheme}>
@@ -80,10 +57,10 @@ function Nav({
       </li>
       <li className="nav__ul__li">
         <a href="#" className="nav__ul__a">
-          {lang}
+          {languageArray[language].lang}
         </a>
         <ul>
-          {languages.map((ele, index) => {
+          {languageArray[language].languages.map((ele, index) => {
             return (
               <li key={index}>
                 <a href="#" className="nav__ul__a" onClick={onChangeLang}>
@@ -100,7 +77,7 @@ function Nav({
           to="/login"
           style={{ textDecoration: "none" }}
         >
-          {login}
+          {languageArray[language].login}
         </Link>
       </li>
       <li>
@@ -109,12 +86,19 @@ function Nav({
           to="/"
           style={{ textDecoration: "none" }}
         >
-          {home}
+          {languageArray[language].home}
         </Link>
       </li>
     </ul>
   );
 }
+
+Nav.propTypes = {
+  isLocalStorageAvailable: PropTypes.bool.isRequired,
+  language: PropTypes.number.isRequired,
+  changeThemeColor: PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
@@ -126,13 +110,6 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   changeThemeColor,
   changeLanguage,
-};
-
-Nav.propTypes = {
-  isLocalStorageAvailable: PropTypes.bool.isRequired,
-  language: PropTypes.number.isRequired,
-  changeThemeColor: PropTypes.func.isRequired,
-  changeLanguage: PropTypes.func.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));

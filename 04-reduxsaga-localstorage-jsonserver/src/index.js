@@ -5,7 +5,7 @@ import App from "./App";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/configureStore";
 import { Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "./components/ReactAlertTemplate";
+import AlertTemplate from "./components/ReactAlertTemplate/";
 
 const options = {
   position: "bottom right",

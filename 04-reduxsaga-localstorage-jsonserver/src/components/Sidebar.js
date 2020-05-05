@@ -2,15 +2,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import "./react-vertical-timeline/VerticalTimeline.css";
-import "./react-vertical-timeline/VerticalTimelineElement.css";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "./react-vertical-timeline";
+import { recover, deleteForever } from "../redux/actions/sidebarAction";
+import "./VerticalTimeline/VerticalTimeline.css";
+import "./VerticalTimeline/VerticalTimelineElement.css";
+import { VerticalTimeline, VerticalTimelineElement } from "./VerticalTimeline";
 import DeleteForever from "@material-ui/icons/DeleteForever";
 import Backup from "@material-ui/icons/Backup";
-import { recover, deleteForever } from "../redux/actions/sidebarAction";
 
 function Sidebar({ deletedItems, recover, deleteForever }) {
   function handleDeleteForever(event) {
@@ -64,6 +61,12 @@ function Sidebar({ deletedItems, recover, deleteForever }) {
   );
 }
 
+Sidebar.propTypes = {
+  deletedItems: PropTypes.array.isRequired,
+  recover: PropTypes.func.isRequired,
+  deleteForever: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     deletedItems: state.deletedItems,
@@ -73,12 +76,6 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   recover,
   deleteForever,
-};
-
-Sidebar.propTypes = {
-  deletedItems: PropTypes.array.isRequired,
-  recover: PropTypes.func.isRequired,
-  deleteForever: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
