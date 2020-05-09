@@ -1,13 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { requestAuthenticateUser } from "../redux/actions/loginAction";
 import languageArray from "../languages";
 
-function Login({ language }) {
+function Login({ language, requestAuthenticateUser }) {
+  function onClick(event) {
+    event.preventDefault();
+    let username = event.target["username"].value;
+    let password = event.target["password"].value;
+    console.log(username, password);
+    requestAuthenticateUser(username, password);
+    // dispatch(mutations.requestAuthenticateUser(username, password));
+  }
+
   return (
     <div className="App__login__form">
       <h1>{languageArray[language].login_h1}</h1>
-      <form>
+      <form onSubmit={onClick}>
         <input
           type="text"
           placeholder={languageArray[language].login_input_username}
@@ -38,4 +48,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(Login);
+const mapDispatchToProps = {
+  requestAuthenticateUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -84,6 +84,8 @@ export default function rootReducer(state, action) {
     return { ...state, deletedItems: newDeletedItems };
   } else if (action.type === types.CHANGELANGUAGE) {
     return { ...state, language: action.value };
+  } else if (action.type === types.REQUEST_AUTHENTICATE_USER) {
+    return { ...state, authenticated: "AUTHENTICATING" };
   } else {
     return state;
   }
