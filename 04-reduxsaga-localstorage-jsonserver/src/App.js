@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import Filter from "./components/Filter";
@@ -6,7 +7,6 @@ import Nav from "./components/Nav";
 import Sidebar from "./components/Sidebar";
 import Login from "./components/Login";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (

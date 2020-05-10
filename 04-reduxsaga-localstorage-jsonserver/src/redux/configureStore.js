@@ -21,11 +21,4 @@ export default function configureStore(state) {
     sagaMiddleware.run(sagas[saga]);
   }
   return store;
-  // return createStore(
-  //   rootReducer,
-  //   state,
-  //   composeEnhancers(
-  //     applyMiddleware(reduxImmutableStateInvariant(), sagaMiddleware)
-  //   )
-  // );
 }
