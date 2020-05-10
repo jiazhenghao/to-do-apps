@@ -8,4 +8,4 @@ This repo is used for creating a simple but representative to-do-app using all k
 
 ## 03 rematch, a framework using redux, once rematch, never redux🤣
 
-## 04 a big step forward, more powerful css styles, more features like rubbish-bin, restore, theme, multi-lingual, localStorage
+## 04 a big step forward, more powerful css styles😏, more features like rubbish-bin, restore, theme, multi-lingual, localStorage👊
