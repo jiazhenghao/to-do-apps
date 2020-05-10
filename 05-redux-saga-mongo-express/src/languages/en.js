@@ -1,0 +1,25 @@
+const en = {
+  title: "To-Do Lists",
+  buttonAdd: "ADD",
+  buttonArray: ["All", "Active", "Completed"],
+  placeHolder: "Add A New Record",
+  alertMessage: "Not a good idea to delete one when searching",
+  themeColors: [
+    "Tomato",
+    "LightBlue",
+    "Pink",
+    "LightSeaGreen",
+    "Grass",
+    "Laker",
+  ],
+  themeHeader: "Pick Up Theme",
+  lang: "language",
+  languages: ["English", "Chinese"],
+  login: "login",
+  home: "Home",
+  login_h1: "Please Login (to use MongoDB)",
+  login_submit: "Login",
+  login_input_username: "username",
+  login_input_password: "password",
+};
+export default en;
