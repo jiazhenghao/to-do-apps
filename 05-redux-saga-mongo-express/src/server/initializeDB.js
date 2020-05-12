@@ -11,5 +11,7 @@ async function initializeDB() {
     }
   }
 }
+
 // initializeDB();
+
 module.exports = initializeDB;
