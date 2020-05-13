@@ -2,18 +2,19 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { connectDB } from "./connect-db";
+import { connectDB } from "./connectDB";
+import { authenticationRoute } from "./authenticate";
 import "./initialize-db";
-// import { authenticationRoute } from "./authenticate";
 
-let port = process.env.PORT || 7777;
+
+let port = process.env.PORT || 3001;
 let app = express();
 
 app.listen(port, console.log("server listening on port: ", port));
 
 app.use(cors(), bodyParser.urlencoded({ extended: true }), bodyParser.json());
 
-// authenticationRoute(app);
+authenticationRoute(app);
 
 // if (process.env.NODE_ENV == "production") {
 //   app.use(express.static(path.resolve(__dirname, "../../dist")));

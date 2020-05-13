@@ -1,6 +1,6 @@
 import uuid from "uuid";
 import md5 from "md5";
-import { connectDB } from "./connect-db";
+import { connectDB } from "./connectDB";
 
 const authenticationTokens = [];
 
@@ -29,21 +29,21 @@ export const authenticationRoute = app => {
     let user = await collection.findOne({ name: username });
 
     if (!user) {
-      return res.status(500).send("User not found");
+      return res.status(500).send("User not found.");
     }
 
     let hash = md5(password);
     let passwordCorrect = hash === user.passwordHash;
     if (!passwordCorrect) {
-      return res.status(500).send("Password incorrect");
+      return res.status(500).send("Password incorrect.");
     }
 
     let token = uuid();
     authenticationTokens.push({
       token,
-      userID: user.id
+      userID: user._id
     });
-    let state = await assembleUserState(user);
-    res.send({ token, state });
+    // let state = await assembleUserState(user);
+    res.send({ token, userID: user._id });
   });
 };
