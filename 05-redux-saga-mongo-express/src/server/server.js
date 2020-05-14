@@ -1,11 +1,10 @@
-import express from "express";
-import path from "path";
-import cors from "cors";
-import bodyParser from "body-parser";
-import { connectDB } from "./connectDB";
-import { authenticationRoute } from "./authenticate";
-import "./initialize-db";
-
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const connectDB = require('./connectDB');
+const authenticationRoute = require("./authenticate");
+require("./initializeDB");
 
 let port = process.env.PORT || 3001;
 let app = express();
@@ -13,6 +12,10 @@ let app = express();
 app.listen(port, console.log("server listening on port: ", port));
 
 app.use(cors(), bodyParser.urlencoded({ extended: true }), bodyParser.json());
+
+app.get("/login", (req, res) => {
+  res.status(200).send("Hello world!");
+});
 
 authenticationRoute(app);
 

@@ -1,5 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
 const chalk = require("chalk");
+
 const url = process.env.MONGODB_URI || `mongodb://localhost:27017/todoapp`;
 let db = null;
 
