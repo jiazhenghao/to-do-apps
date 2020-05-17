@@ -1,7 +1,7 @@
 import { take, put } from "redux-saga/effects";
 import axios from "axios";
 import * as types from "../actions/actionTypes";
-import { processAuthenticateUser } from "../actions/loginAction";
+import { processAuthenticateUser, setMongoState } from "../actions/loginAction";
 import { history } from "../history";
 
 // add production url to ""
@@ -19,11 +19,15 @@ export function* userAuthenticationSaga() {
       if (!data) {
         throw new Error("Login Failed! Try Again maybe");
       }
-      console.log("Authenticated!!!", data);
-      // yield put(types.setState(data.state));
+      console.log("Authenticated!!!");
+      console.log(data);
+
+      // change state according to data fetched from MongoDB
+      yield put(setMongoState({ currentMode: 2 }));
 
       // change state.authenticated to "AUTENTICATED"
       yield put(processAuthenticateUser("AUTHENTICATED"));
+
       history.push("/index");
     } catch (e) {
       console.log("Can't authenticate!");

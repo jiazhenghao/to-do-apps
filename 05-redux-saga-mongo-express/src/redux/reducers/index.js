@@ -88,6 +88,8 @@ export default function rootReducer(state, action) {
     return { ...state, authenticated: "AUTHENTICATING" };
   } else if (action.type === types.PROCESS_AUTHENTICATE_USER) {
     return { ...state, authenticated: action.status };
+  } else if (action.type === types.SET_MONGO_STATE) {
+    return { ...state, ...action.state };
   } else {
     return state;
   }

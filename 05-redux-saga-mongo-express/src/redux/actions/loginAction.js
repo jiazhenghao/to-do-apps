@@ -7,3 +7,7 @@ export function requestAuthenticateUser(username, password) {
 export function processAuthenticateUser(status) {
   return { type: types.PROCESS_AUTHENTICATE_USER, status };
 }
+
+export function setMongoState(state) {
+  return { type: types.SET_MONGO_STATE, state };
+}

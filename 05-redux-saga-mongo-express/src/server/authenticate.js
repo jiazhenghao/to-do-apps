@@ -10,10 +10,9 @@ async function assembleUserState(user) {
     .collection("todolists")
     .find({ userName: user.name })
     .toArray();
-  // let groups = await db.collection("groups").find({ owner: user.id }).toArray();
   return {
     tasks,
-    session: { authenticated: "AUTHENTICATED", id: user._id },
+    session: { authenticated: "AUTHENTICATED", id: user._id, user: user.name },
   };
 }
 
