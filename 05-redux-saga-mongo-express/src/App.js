@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
+import { history } from "./redux/history";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import Filter from "./components/Filter";
@@ -10,7 +12,7 @@ import "./App.css";
 
 function App() {
   return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         <div className="App__nav">
           <Nav />
@@ -26,10 +28,10 @@ function App() {
               <Sidebar />
             </div>
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/index">
+          <Route exact path="/index">
             <div className="APP__todo">
               <AddTodo />
               <TodoList />

@@ -53,6 +53,14 @@ module.exports = {
       createdTime: "2020-2-3 15:23:54",
     },
     {
+      userName: "jzh",
+      content: "使用tip6，顶顶顶",
+      isComplete: true,
+      completeTime: "2020-2-3 15:21:54",
+      deleteTime: "2020-2-3 15:26:54",
+      createdTime: "2020-2-3 14:23:54",
+    },
+    {
       userName: "xml",
       content:
         "使用tip1，首次登陆，尝试从浏览器的localStorage读取内容，如果浏览器不支持，则每次记录的内容无法保存，下次登陆会重置",
