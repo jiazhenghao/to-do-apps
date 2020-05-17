@@ -77,6 +77,8 @@ export function* userAuthenticationSaga() {
           show: 0,
           lists,
           deletedItems,
+          user: data.state.session.user,
+          token: data.token,
         })
       );
 

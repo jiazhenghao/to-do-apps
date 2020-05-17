@@ -1,7 +1,9 @@
 import React from "react";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Router, Switch, Route } from "react-router-dom";
 import { history } from "./redux/history";
+import { Redirect } from "react-router";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import Filter from "./components/Filter";
@@ -10,7 +12,7 @@ import Sidebar from "./components/Sidebar";
 import Login from "./components/Login";
 import "./App.css";
 
-function App() {
+function App({ authenticated }) {
   return (
     <Router history={history}>
       <div className="App">
@@ -29,7 +31,11 @@ function App() {
             </div>
           </Route>
           <Route exact path="/login">
-            <Login />
+            {authenticated === "AUTHENTICATED" ? (
+              <Redirect to="/" />
+            ) : (
+              <Login />
+            )}
           </Route>
           <Route exact path="/index">
             <div className="APP__todo">
@@ -47,4 +53,14 @@ function App() {
   );
 }
 
-export default App;
+App.propTypes = {
+  authenticated: PropTypes.string.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.authenticated,
+  };
+}
+
+export default connect(mapStateToProps, null)(App);

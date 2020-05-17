@@ -9,6 +9,7 @@ const cn = {
   lang: "语言",
   languages: ["英文", "中文"],
   login: "登陆",
+  logout: "登出",
   home: "回到首页",
   login_h1: "请登陆（登陆后使用MongoDB）",
   login_submit: "登陆",

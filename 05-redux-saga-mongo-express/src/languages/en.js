@@ -16,6 +16,7 @@ const en = {
   lang: "language",
   languages: ["English", "Chinese"],
   login: "login",
+  logout: "logout",
   home: "Home",
   login_h1: "Please Login (to use MongoDB)",
   login_submit: "Login",

@@ -11,6 +11,8 @@ function Nav({
   changeThemeColor,
   language,
   changeLanguage,
+  authenticated,
+  user,
 }) {
   function onChangeTheme(e) {
     e.preventDefault();
@@ -77,18 +79,22 @@ function Nav({
           to="/login"
           style={{ textDecoration: "none" }}
         >
-          {languageArray[language].login}
+          {authenticated === "AUTHENTICATED"
+            ? user + " " + languageArray[language].logout
+            : languageArray[language].login}
         </Link>
       </li>
-      <li>
-        <Link
-          className="nav__ul__li nav__ul__a"
-          to="/"
-          style={{ textDecoration: "none" }}
-        >
-          {languageArray[language].home}
-        </Link>
-      </li>
+      {authenticated === "AUTHENTICATED" ? null : (
+        <li>
+          <Link
+            className="nav__ul__li nav__ul__a"
+            to="/"
+            style={{ textDecoration: "none" }}
+          >
+            {languageArray[language].home}
+          </Link>
+        </li>
+      )}
     </ul>
   );
 }
@@ -98,12 +104,16 @@ Nav.propTypes = {
   language: PropTypes.number.isRequired,
   changeThemeColor: PropTypes.func.isRequired,
   changeLanguage: PropTypes.func.isRequired,
+  authenticated: PropTypes.string.isRequired,
+  user: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     isLocalStorageAvailable: state.isLocalStorageAvailable,
     language: state.language,
+    authenticated: state.authenticated,
+    user: state.user,
   };
 }
 
