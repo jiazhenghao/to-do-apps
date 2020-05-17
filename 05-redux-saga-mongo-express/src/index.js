@@ -8,6 +8,7 @@ import AlertTemplate from "./components/ReactAlertTemplate/";
 import { options, initialState } from "./config";
 import { localStorageInitialize } from "./utils/localStorageInitialize";
 import "./index.css";
+import "./utils/webToken";
 
 const state = localStorageInitialize(initialState);
 
