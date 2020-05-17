@@ -29,6 +29,16 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/index">
+            <div className="APP__todo">
+              <AddTodo />
+              <TodoList />
+              <Filter />
+            </div>
+            <div className="APP__sidebar">
+              <Sidebar />
+            </div>
+          </Route>
         </Switch>
       </div>
     </Router>

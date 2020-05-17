@@ -86,6 +86,8 @@ export default function rootReducer(state, action) {
     return { ...state, language: action.value };
   } else if (action.type === types.REQUEST_AUTHENTICATE_USER) {
     return { ...state, authenticated: "AUTHENTICATING" };
+  } else if (action.type === types.PROCESS_AUTHENTICATE_USER) {
+    return { ...state, authenticated: action.status };
   } else {
     return state;
   }

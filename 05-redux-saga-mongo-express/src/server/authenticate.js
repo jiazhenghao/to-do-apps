@@ -1,27 +1,23 @@
 const uuid = require("uuid");
 const md5 = require("md5");
-const connectDB = require('./connectDB');
+const connectDB = require("./connectDB");
 
 const authenticationTokens = [];
 
-// async function assembleUserState(user) {
-//   let db = await connectDB();
-//   let tasks = await db
-//     .collection("tasks")
-//     .find({ owner: user.id })
-//     .toArray();
-//   let groups = await db
-//     .collection("groups")
-//     .find({ owner: user.id })
-//     .toArray();
-//   return {
-//     tasks,
-//     groups,
-//     session: { authenticated: "AUTHENTICATED", id: user.id }
-//   };
-// }
+async function assembleUserState(user) {
+  let db = await connectDB();
+  let tasks = await db
+    .collection("todolists")
+    .find({ userName: user.name })
+    .toArray();
+  // let groups = await db.collection("groups").find({ owner: user.id }).toArray();
+  return {
+    tasks,
+    session: { authenticated: "AUTHENTICATED", id: user._id },
+  };
+}
 
-const authenticationRoute = app => {
+const authenticationRoute = (app) => {
   app.post("/authenticate", async (req, res) => {
     let { username, password } = req.body;
     let db = await connectDB();
@@ -41,10 +37,10 @@ const authenticationRoute = app => {
     let token = uuid();
     authenticationTokens.push({
       token,
-      userID: user._id
+      userID: user._id,
     });
-    // let state = await assembleUserState(user);
-    res.send({ token, userID: user._id });
+    let state = await assembleUserState(user);
+    res.send({ token, state });
   });
 };
 

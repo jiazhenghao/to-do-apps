@@ -66,6 +66,7 @@ export function localStorageInitialize(initialState) {
       const num = localStorage.getItem("language") * 1;
       initialState.language = num;
     }
+    // console.log(initialState);
     return initialState;
   } else {
     initialState.lists = [

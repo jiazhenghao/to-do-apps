@@ -12,5 +12,5 @@ export const initialState = {
   themeColor: 0,
   deletedItems: [],
   language: 0, // 0:English 1:Chinese
-  authenticated: false,
+  authenticated: "NOT_AUTHENTICATED",
 };

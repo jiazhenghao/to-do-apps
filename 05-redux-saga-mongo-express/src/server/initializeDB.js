@@ -1,6 +1,6 @@
-const connectDB = require('./connectDB');
+const connectDB = require("./connectDB");
 const defaultState = require("./defaultState");
-
+const chalk = require("chalk");
 
 async function initializeDB() {
   let db = await connectDB();
@@ -10,7 +10,7 @@ async function initializeDB() {
       let collection = db.collection(collectionName);
       await collection.insertMany(defaultState[collectionName]);
     }
-    console.log("first initialize mongodb");
+    console.log(chalk.green("first initialize mongodb"));
   }
 }
 
