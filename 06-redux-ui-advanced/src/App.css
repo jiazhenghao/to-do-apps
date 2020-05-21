@@ -1,0 +1,214 @@
+.App {
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 15% 25% 55% auto;
+  height: 100vh;
+}
+
+.App__nav {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.nav__ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  background-color: var(--theme-main);
+}
+
+.nav__ul__li {
+  position: relative;
+}
+
+.nav__ul__li:hover > ul {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.nav__ul__li > ul {
+  display: none;
+}
+
+.nav__ul__a:hover {
+  background: var(--theme-main-hover);
+}
+
+.nav__ul__a {
+  text-decoration: none;
+  display: block;
+  padding: 1.5em;
+  color: var(--theme-main-font);
+  font-weight: bold;
+  background-color: var(--theme-main);
+  width: 140px;
+}
+
+.APP__todo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  display: grid;
+  grid-template-rows: 10% 5% auto 10%;
+}
+
+.APP__sidebar {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.AddTodo {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  display: grid;
+  grid-template-columns: 5% 60% 30% 5%;
+}
+
+.AddTodo input {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  font-size: 200%;
+  font-weight: bold;
+}
+
+.AddTodo button {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  background-color: var(--theme-main);
+  font-size: 200%;
+  font-weight: bold;
+  color: var(--theme-main-font);
+}
+
+.TodoList {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 5% auto 5%;
+}
+
+.TodoList-div {
+  margin: 0;
+  padding: 0;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  opacity: 1;
+  box-sizing: border-box;
+  transition: height 1000ms 0ms, opacity 1000ms 1000ms;
+}
+
+.TodoList-div.hide {
+  transition: height 1000ms 1000ms, opacity 1000ms 0ms;
+  opacity: 0;
+  height: 0px;
+}
+
+.TodoList h1 {
+  font-size: 100%;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.Filter {
+  width: 100%;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  display: grid;
+  justify-content: space-evenly;
+  margin: auto auto 10px auto;
+  grid-template-columns: 5% auto 5%;
+}
+
+.btn {
+  border-radius: 5px;
+  background-color: white;
+  justify-self: center;
+  font-weight: bold;
+}
+
+.btn-large {
+  white-space: nowrap;
+  height: 100%;
+  font-size: 120%;
+  border: 1px solid transparent;
+}
+
+.active {
+  background-color: var(--theme-main);
+  border: 1px solid black;
+}
+
+#__react-alert__ div div div {
+  background-color: var(--theme-main-hover);
+}
+
+.App__login__form {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  margin: 0 auto;
+  width: 50vw;
+  padding: 20px 30px 20px 30px;
+  font-size: 18px;
+  color: var(--theme-main-font);
+  text-shadow: 1px 1px 1px var(--theme-main-font);
+  border: none;
+  border-radius: 5px;
+  background-color: #aaa;
+}
+
+.App__login__form h1 {
+  padding: 0px 0px 10px 40px;
+  margin: -10px -30px 30px -30px;
+}
+
+.App__login__form input[type="text"],
+.App__login__form input[type="password"] {
+  border: none;
+  color: var(--theme-main-hover);
+  height: 25px;
+  line-height: 15px;
+  margin-bottom: 16px;
+  margin-right: 6px;
+  margin-top: 2px;
+  padding: 5px 0px 5px 5px;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.App__login__form button {
+  background: var(--theme-main);
+  border: none;
+  padding: 10px 25px 10px 25px;
+  color: var(--theme-main-font);
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  text-shadow: 1px 1px 1px var(--theme-main-font);
+  font-weight: bold;
+  box-shadow: 1px 1px 1px var(--theme-main-font);
+}
+
+.App__login__form button:hover {
+  color: var(--theme-main-font);
+  background-color: var(--theme-main-hover);
+}
