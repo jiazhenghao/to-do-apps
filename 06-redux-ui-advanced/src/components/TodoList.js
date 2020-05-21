@@ -1,9 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { toggle, deleteOneItem } from "../redux/actions/todoListActions";
+import {
+  toggle,
+  deleteOneItem,
+  liftOne,
+  downOne,
+  liftTop,
+  downBottom,
+} from "../redux/actions/todoListActions";
 import { useAlert } from "react-alert";
 import languageArray from "../languages";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import VerticalAlignTop from "@material-ui/icons/VerticalAlignTop";
+import VerticalAlignBottom from "@material-ui/icons/VerticalAlignBottom";
 
 function TodoList({
   show,
@@ -12,6 +23,10 @@ function TodoList({
   deleteOneItem,
   filterValue,
   language,
+  liftOne,
+  downOne,
+  liftTop,
+  downBottom,
 }) {
   let newLists = [];
   const alert = useAlert();
@@ -41,6 +56,40 @@ function TodoList({
     }
   }
 
+  function handleUpOne(event) {
+    let index =
+      event.target.getAttribute("data-index") !== null
+        ? event.target.getAttribute("data-index")
+        : event.target.parentElement.getAttribute("data-index");
+    // console.log(event.target.getAttribute("data-index"));
+    // console.log(event.target);
+    liftOne(index * 1);
+  }
+
+  function handleDownOne(event) {
+    let index =
+      event.target.getAttribute("data-index") !== null
+        ? event.target.getAttribute("data-index")
+        : event.target.parentElement.getAttribute("data-index");
+    downOne(index * 1);
+  }
+
+  function handleTop(event) {
+    let index =
+      event.target.getAttribute("data-index") !== null
+        ? event.target.getAttribute("data-index")
+        : event.target.parentElement.getAttribute("data-index");
+    liftTop(index);
+  }
+
+  function handleBottom(event) {
+    let index =
+      event.target.getAttribute("data-index") !== null
+        ? event.target.getAttribute("data-index")
+        : event.target.parentElement.getAttribute("data-index");
+    downBottom(index);
+  }
+
   if (filterValue !== "") {
     newLists = lists.map((ele) => {
       if (ele[0].indexOf(filterValue) !== -1) {
@@ -64,25 +113,41 @@ function TodoList({
             <div
               key={ele.toString() + Math.random()}
               className="TodoList-div"
-              onClick={handleClick}
               onContextMenu={handleClick}
             >
-              <h1>
+              <span onClick={handleClick}>
                 {index + 1}: {ele[0]}
-              </h1>
-              <hr />
+              </span>
+              <div style={{ float: "right" }} data-index={index}>
+                <ArrowUpward onClick={handleUpOne} data-index={index} />
+                <ArrowDownward onClick={handleDownOne} data-index={index} />
+                <VerticalAlignTop onClick={handleTop} data-index={index} />
+                <VerticalAlignBottom
+                  onClick={handleBottom}
+                  data-index={index}
+                />
+              </div>
+              <hr style={{ clear: "both" }} />
             </div>
           ) : (
             <div
               key={ele.toString() + Math.random()}
               className="TodoList-div"
-              onClick={handleClick}
               onContextMenu={handleClick}
             >
-              <h1 className="completed">
+              <span onClick={handleClick} className="completed">
                 {index + 1}: {ele[0]}
-              </h1>
-              <hr />
+              </span>
+              <div style={{ float: "right" }} data-index={index}>
+                <ArrowUpward onClick={handleUpOne} data-index={index} />
+                <ArrowDownward onClick={handleDownOne} data-index={index} />
+                <VerticalAlignTop onClick={handleTop} data-index={index} />
+                <VerticalAlignBottom
+                  onClick={handleBottom}
+                  data-index={index}
+                />
+              </div>
+              <hr style={{ clear: "both" }} />
             </div>
           );
         })}
@@ -99,13 +164,21 @@ function TodoList({
             <div
               key={ele.toString() + Math.random()}
               className="TodoList-div"
-              onClick={handleClick}
               onContextMenu={handleClick}
             >
-              <h1>
+              <span onClick={handleClick}>
                 {index + 1}: {ele[0]}
-              </h1>
-              <hr />
+              </span>
+              <div style={{ float: "right" }} data-index={index}>
+                <ArrowUpward onClick={handleUpOne} data-index={index} />
+                <ArrowDownward onClick={handleDownOne} data-index={index} />
+                <VerticalAlignTop onClick={handleTop} data-index={index} />
+                <VerticalAlignBottom
+                  onClick={handleBottom}
+                  data-index={index}
+                />
+              </div>
+              <hr style={{ clear: "both" }} />
             </div>
           ) : null;
         })}
@@ -122,13 +195,21 @@ function TodoList({
             <div
               key={ele.toString() + Math.random()}
               className="TodoList-div"
-              onClick={handleClick}
               onContextMenu={handleClick}
             >
-              <h1>
+              <span onClick={handleClick}>
                 {index + 1}: {ele[0]}
-              </h1>
-              <hr />
+              </span>
+              <div style={{ float: "right" }} data-index={index}>
+                <ArrowUpward onClick={handleUpOne} data-index={index} />
+                <ArrowDownward onClick={handleDownOne} data-index={index} />
+                <VerticalAlignTop onClick={handleTop} data-index={index} />
+                <VerticalAlignBottom
+                  onClick={handleBottom}
+                  data-index={index}
+                />
+              </div>
+              <hr style={{ clear: "both" }} />
             </div>
           ) : null;
         })}
@@ -144,6 +225,10 @@ TodoList.propTypes = {
   deleteOneItem: PropTypes.func.isRequired,
   filterValue: PropTypes.string.isRequired,
   language: PropTypes.number.isRequired,
+  liftOne: PropTypes.func.isRequired,
+  downOne: PropTypes.func.isRequired,
+  liftTop: PropTypes.func.isRequired,
+  downBottom: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -158,6 +243,10 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   toggle,
   deleteOneItem,
+  liftOne,
+  downOne,
+  liftTop,
+  downBottom,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -90,6 +90,59 @@ export default function rootReducer(state, action) {
     return { ...state, authenticated: action.status };
   } else if (action.type === types.SET_MONGO_STATE) {
     return { ...state, ...action.state };
+  } else if (action.type === types.LIFT_ONE) {
+    // console.log(action.index);
+    if (action.index === 0) return state;
+
+    let newLists = state.lists.map((value) => [...value]);
+    // console.log(newLists);
+    const item = newLists.splice(action.index, 1);
+    newLists.splice(action.index - 1, 0, item[0]);
+
+    // localStorage
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+    }
+    return { ...state, lists: newLists };
+  } else if (action.type === types.DOWN_ONE) {
+    if (action.index === state.lists.length - 1) return state;
+    let newLists = state.lists.map((value) => [...value]);
+    const item = newLists.splice(action.index, 1);
+    newLists.splice(action.index + 1, 0, item[0]);
+
+    // localStorage
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+    }
+    return { ...state, lists: newLists };
+  } else if (action.type === types.LIFT_TOP) {
+    if (action.index === 0) return state;
+
+    let newLists = state.lists.map((value) => [...value]);
+    const item = newLists.splice(action.index, 1);
+    newLists.unshift(item[0]);
+
+    // localStorage
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+    }
+    return { ...state, lists: newLists };
+  } else if (action.type === types.DOWN_BOTTOM) {
+    if (action.index === state.lists.length - 1) return state;
+
+    let newLists = state.lists.map((value) => [...value]);
+    const item = newLists.splice(action.index, 1);
+    newLists.push(item[0]);
+
+    // localStorage
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+    }
+    return { ...state, lists: newLists };
   } else {
     return state;
   }
