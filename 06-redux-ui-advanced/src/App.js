@@ -9,7 +9,13 @@ import TodoList from "./components/TodoList";
 import Filter from "./components/Filter";
 import Nav from "./components/Nav";
 import Sidebar from "./components/Sidebar";
+import Upload from "./components/Upload";
 import "./App.css";
+// import FileSaver from "file-saver";
+
+// console.log(FileSaver);
+// const blob = new Blob(["Hello, world!"], { type: "text/plain;charset=utf-8" });
+// FileSaver.saveAs(blob, "hello world.txt");
 
 function App({ authenticated }) {
   return (
@@ -27,6 +33,11 @@ function App({ authenticated }) {
             </div>
             <div className="APP__sidebar">
               <Sidebar />
+            </div>
+          </Route>
+          <Route exact path="/import">
+            <div className="APP__todo">
+              <Upload />
             </div>
           </Route>
         </Switch>

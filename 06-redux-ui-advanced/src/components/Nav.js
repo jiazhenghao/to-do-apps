@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { changeThemeColor, changeLanguage } from "../redux/actions/navAction";
 import languageArray from "../languages";
-// import { Link, withRouter } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import FileSaver from "file-saver";
 
 function Nav({
   isLocalStorageAvailable,
@@ -38,6 +38,27 @@ function Nav({
       localStorage.setItem("language", languagePick);
     }
     changeLanguage(languagePick);
+  }
+
+  function onExport() {
+    // let array = [];
+    // array.push(
+    //   "theme-todoapp " + localStorage.getItem("theme-todoapp") + " \r\n"
+    // );
+    // array.push("language " + localStorage.getItem("language") + " \r\n");
+    // array.push("lists " + localStorage.getItem("lists") + " \r\n");
+    // array.push("deletedItems " + localStorage.getItem("deletedItems"));
+    let obj = {};
+    obj["theme-todoapp"] = localStorage.getItem("theme-todoapp");
+    obj["language"] = localStorage.getItem("language");
+    obj["lists"] = localStorage.getItem("lists");
+    obj["deletedItems"] = localStorage.getItem("deletedItems");
+
+    const blob = new Blob([JSON.stringify(obj)], {
+      type: "text/plain;charset=utf-8",
+    });
+    const date = new Date();
+    FileSaver.saveAs(blob, `导出记录${date.toLocaleDateString()}.js`);
   }
 
   return (
@@ -73,6 +94,29 @@ function Nav({
             );
           })}
         </ul>
+      </li>
+      <li>
+        <Link
+          className="nav__ul__li nav__ul__a"
+          to="/import"
+          style={{ textDecoration: "none" }}
+        >
+          {languageArray[language].import}
+        </Link>
+      </li>
+      <li className="nav__ul__li">
+        <a href="#" className="nav__ul__a" onClick={onExport}>
+          {languageArray[language].export}
+        </a>
+      </li>
+      <li>
+        <Link
+          className="nav__ul__li nav__ul__a"
+          to="/"
+          style={{ textDecoration: "none" }}
+        >
+          {languageArray[language].home}
+        </Link>
       </li>
     </ul>
   );

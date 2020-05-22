@@ -22,5 +22,8 @@ const en = {
   login_submit: "Login",
   login_input_username: "username",
   login_input_password: "password",
+  import: "import data",
+  export: "export data",
+  upload: "Drop files here or click to upload",
 };
 export default en;

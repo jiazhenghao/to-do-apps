@@ -15,5 +15,8 @@ const cn = {
   login_submit: "登陆",
   login_input_username: "用户名",
   login_input_password: "密码",
+  import: "数据导入",
+  export: "数据导出",
+  upload: "直接把文件拖入或者单击打开",
 };
 export default cn;

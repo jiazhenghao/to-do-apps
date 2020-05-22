@@ -14,3 +14,4 @@ export const LIFT_ONE = "LIFT_ONE";
 export const DOWN_ONE = "DOWN_ONE";
 export const LIFT_TOP = "LIFT_TOP";
 export const DOWN_BOTTOM = "DOWN_BOTTOM";
+export const COVER_STATE_LOCALSTORAGE = "COVER_STATE_LOCALSTORAGE";

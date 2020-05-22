@@ -143,6 +143,30 @@ export default function rootReducer(state, action) {
       localStorage.setItem("lists", str);
     }
     return { ...state, lists: newLists };
+  } else if (action.type === types.COVER_STATE_LOCALSTORAGE) {
+    const newLang = action.state.language;
+    localStorage.setItem("language", newLang);
+
+    const newTheme = action.state["theme-todoapp"];
+    localStorage.setItem("theme-todoapp", newTheme);
+
+    const newLists = action.state.lists;
+    // console.log(typeof newLists); string
+    // console.log(JSON.parse(newLists));
+    // console.log(typeof JSON.parse(newLists));
+    localStorage.setItem("lists", newLists);
+
+    const newDeletedItems = action.state.deletedItems;
+    localStorage.setItem("deletedItems", newDeletedItems);
+
+    // console.log("import done!");
+    return {
+      ...state,
+      language: newLang * 1,
+      themeColor: newTheme * 1,
+      lists: JSON.parse(newLists),
+      deletedItems: JSON.parse(newDeletedItems),
+    };
   } else {
     return state;
   }

@@ -212,3 +212,12 @@
   color: var(--theme-main-font);
   background-color: var(--theme-main-hover);
 }
+
+/* .APP__upload__div {
+  background-color: var(--theme-main-hover);
+} */
+
+.APP__upload__div__h1 {
+  background-color: blanchedalmond;
+  font-size: 28px;
+}
