@@ -4,29 +4,27 @@ export function localStorageInitialize(initialState) {
     if (localStorage.getItem("lists") === null) {
       const array = [
         [
-          "使用tip1，首次登陆，尝试从浏览器的localStorage读取内容，如果浏览器不支持，则每次记录的内容无法保存，下次登陆会重置",
+          "使用tip1，首次登陆，您会看到以下这些使用教程。跟着我，学会如何操作吧🤓",
+          1,
+        ],
+        ["使用tip2，建议不要使用IE浏览器，可以使用FireFox，Chrome等浏览器", 1],
+        [
+          "使用tip3，输入你要做的待办事宜，点击添加，就完成记录了，数据存储在本地浏览器的数据库里，超级安全，足够隐私，请放心大胆使用",
           1,
         ],
         [
-          "使用tip2，如果浏览器有localStorage，则每次登陆，内容不丢失，支持localStorage的浏览器，请查询https://caniuse.com/#search=localStorage",
+          "使用tip4，鼠标左键某记录，会将该待办记录在完成与未完成状态之间切换。右键删除，进入右侧回收站区域",
           1,
         ],
         [
-          "使用tip3，左键某条代办记录，该记录的状态会在active和completed之间切换，右键，会删除",
+          "使用tip5，输入框除了可以添加记录，也可以搜索某条记录，适用于代办过多的情况",
           1,
         ],
         [
-          "使用tip4，右键删除的记录会被放到右侧的回收区，点击垃圾回收图标，永久删除，点击cloud图标，则该记录会被还原且置顶",
+          "使用tip6，回收站的待办可以永久删除（垃圾筒图标），也可以放回工作区（云图标）",
           1,
         ],
-        [
-          "使用tip5，输入框除了可以add记录，也可以搜索某条记录，适用于代办过多的情况",
-          1,
-        ],
-        [
-          "使用tip6，所有数据存在本地浏览器中，对个人安全，但即使同一台电脑，跨多个浏览器，存储是不同的",
-          1,
-        ],
+        ["使用tip7，其余功能烦请自行探索，happy coding, happy using，thx", 1],
       ];
       const str = JSON.stringify(array);
       localStorage.setItem("lists", str);
