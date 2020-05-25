@@ -23,3 +23,7 @@ export function liftTop(index) {
 export function downBottom(index) {
   return { type: types.DOWN_BOTTOM, index };
 }
+
+export function toSave(index, text) {
+  return { type: types.TO_SAVE, index, text };
+}

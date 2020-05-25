@@ -167,6 +167,18 @@ export default function rootReducer(state, action) {
       lists: JSON.parse(newLists),
       deletedItems: JSON.parse(newDeletedItems),
     };
+  } else if (action.type === types.TO_SAVE) {
+    // console.log("TO_SAVE");
+    // console.log(action.index);
+    let newLists = state.lists.map((value) => [...value]);
+    newLists[action.index][0] = action.text;
+    // if localStorage is available
+    if (state.currentMode === 1) {
+      const str = JSON.stringify(newLists);
+      localStorage.setItem("lists", str);
+    }
+    return { ...state, lists: newLists };
+    // return { ...state, lists: newLists, filterValue: "" };
   } else {
     return state;
   }

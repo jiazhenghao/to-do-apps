@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -8,6 +9,7 @@ import {
   downOne,
   liftTop,
   downBottom,
+  toSave,
 } from "../redux/actions/todoListActions";
 import { useAlert } from "react-alert";
 import languageArray from "../languages";
@@ -15,6 +17,13 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import VerticalAlignTop from "@material-ui/icons/VerticalAlignTop";
 import VerticalAlignBottom from "@material-ui/icons/VerticalAlignBottom";
+import Edit from "@material-ui/icons/Edit";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
+
+let selectedIndex;
+let selectedText;
 
 function TodoList({
   show,
@@ -27,6 +36,7 @@ function TodoList({
   downOne,
   liftTop,
   downBottom,
+  toSave,
 }) {
   let newLists = [];
   const alert = useAlert();
@@ -61,8 +71,6 @@ function TodoList({
       event.target.getAttribute("data-index") !== null
         ? event.target.getAttribute("data-index")
         : event.target.parentElement.getAttribute("data-index");
-    // console.log(event.target.getAttribute("data-index"));
-    // console.log(event.target);
     liftOne(index * 1);
   }
 
@@ -88,6 +96,30 @@ function TodoList({
         ? event.target.getAttribute("data-index")
         : event.target.parentElement.getAttribute("data-index");
     downBottom(index);
+  }
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function handleEdit(event) {
+    selectedIndex =
+      event.target.getAttribute("data-index") !== null
+        ? event.target.getAttribute("data-index")
+        : event.target.parentElement.getAttribute("data-index");
+    selectedText = lists[selectedIndex][0];
+    setIsOpen(true);
+  }
+
+  function handleSave(event) {
+    event.preventDefault();
+    const text = event.target["message"].value;
+    console.log(text);
+    console.log(selectedIndex);
+    toSave(selectedIndex, text);
+    closeModal();
   }
 
   if (filterValue !== "") {
@@ -126,6 +158,7 @@ function TodoList({
                   onClick={handleBottom}
                   data-index={index}
                 />
+                <Edit onClick={handleEdit} data-index={index} />
               </div>
               <hr style={{ clear: "both" }} />
             </div>
@@ -146,11 +179,37 @@ function TodoList({
                   onClick={handleBottom}
                   data-index={index}
                 />
+                <Edit onClick={handleEdit} data-index={index} />
               </div>
               <hr style={{ clear: "both" }} />
             </div>
           );
         })}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Edit Record"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <form action="" className="smart-green" onSubmit={handleSave}>
+            <h1>{languageArray[language].change_h1} 😝</h1>
+            <label>
+              <span>{languageArray[language].change_origin}</span>
+              <input type="text" value={selectedText} readOnly />
+            </label>
+            <label>
+              <span>{languageArray[language].change_here}</span>
+              <textarea id="message" name="message" placeholder=""></textarea>
+            </label>
+            <label>
+              <span>&nbsp;</span>
+              <button className="button" value="save" type="submit">
+                {languageArray[language].change_save}
+              </button>
+            </label>
+          </form>
+        </Modal>
       </div>
     );
   } else if (show === 1) {
@@ -177,11 +236,37 @@ function TodoList({
                   onClick={handleBottom}
                   data-index={index}
                 />
+                <Edit onClick={handleEdit} data-index={index} />
               </div>
               <hr style={{ clear: "both" }} />
             </div>
           ) : null;
         })}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Edit Record"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <form action="" className="smart-green" onSubmit={handleSave}>
+            <h1>{languageArray[language].change_h1}</h1>
+            <label>
+              <span>{languageArray[language].change_origin}</span>
+              <input type="text" value={selectedText} readOnly />
+            </label>
+            <label>
+              <span>{languageArray[language].change_here}</span>
+              <textarea id="message" name="message" placeholder=""></textarea>
+            </label>
+            <label>
+              <span>&nbsp;</span>
+              <button className="button" value="save" type="submit">
+                {languageArray[language].change_save}
+              </button>
+            </label>
+          </form>
+        </Modal>
       </div>
     );
   } else {
@@ -208,11 +293,37 @@ function TodoList({
                   onClick={handleBottom}
                   data-index={index}
                 />
+                <Edit onClick={handleEdit} data-index={index} />
               </div>
               <hr style={{ clear: "both" }} />
             </div>
           ) : null;
         })}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Edit Record"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <form action="" className="smart-green" onSubmit={handleSave}>
+            <h1>{languageArray[language].change_h1}</h1>
+            <label>
+              <span>{languageArray[language].change_origin}</span>
+              <input type="text" value={selectedText} readOnly />
+            </label>
+            <label>
+              <span>{languageArray[language].change_here}</span>
+              <textarea id="message" name="message" placeholder=""></textarea>
+            </label>
+            <label>
+              <span>&nbsp;</span>
+              <button className="button" value="save" type="submit">
+                {languageArray[language].change_save}
+              </button>
+            </label>
+          </form>
+        </Modal>
       </div>
     );
   }
@@ -229,6 +340,7 @@ TodoList.propTypes = {
   downOne: PropTypes.func.isRequired,
   liftTop: PropTypes.func.isRequired,
   downBottom: PropTypes.func.isRequired,
+  toSave: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -247,6 +359,7 @@ const mapDispatchToProps = {
   downOne,
   liftTop,
   downBottom,
+  toSave,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

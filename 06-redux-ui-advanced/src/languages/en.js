@@ -10,7 +10,7 @@ const en = {
     "Pink",
     "LightSeaGreen",
     "Grass",
-    "Laker",
+    "Laker Show 🏀",
   ],
   themeHeader: "Pick Up Theme",
   lang: "language",
@@ -25,5 +25,9 @@ const en = {
   import: "import data",
   export: "export data",
   upload: "Drop files here or click to upload",
+  change_h1: "Change the content of selected record",
+  change_origin: "Your original record",
+  change_here: "Make a change here",
+  change_save: "save",
 };
 export default en;
